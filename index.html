@@ -576,80 +576,41 @@
 
 
 <!-- MAP SECTION -->
-<section class="map-section" id="peta">
-  <div class="container">
-    <div class="reveal">
-      <div class="sec-tag">Peta Interaktif</div>
-      <h2 class="sec-title">Peta Wonogiri — 19 Titik Wisata & UMKM</h2>
-      <p class="sec-sub">Klik pin untuk info lengkap. Scroll untuk zoom, drag untuk geser.</p>
-    </div>
-    <div class="map-filter-bar reveal">
-      <button class="mf-btn active" onclick="filterMap('semua',this)">Semua (19)</button>
-      <button class="mf-btn" onclick="filterMap('wisata',this)">🏞 Wisata Alam</button>
-      <button class="mf-btn" onclick="filterMap('kuliner',this)">🍜 Kuliner</button>
-      <button class="mf-btn" onclick="filterMap('oleholeh',this)">🛍 Oleh-oleh</button>
-      <button class="mf-btn" onclick="filterMap('kerajinan',this)">🎨 Kerajinan</button>
-      <button class="mf-btn" onclick="filterMap('budaya',this)">🏛 Budaya</button>
-    </div>
-    <div class="map-wrap">
-      <canvas id="wMap" style="width:100%;height:580px;display:block;background:#1a2e1a;cursor:grab"></canvas>
-      <div class="map-zoom-btns">
-        <button class="mzb" onclick="zoomMap(1)" title="Zoom In">+</button>
-        <button class="mzb" onclick="zoomMap(-1)" title="Zoom Out">−</button>
-        <button class="mzb" onclick="resetMap()" title="Reset" style="font-size:11px">⌂</button>
-      </div>
-      <div class="map-popup" id="mapPopup">
-        <button class="popup-close" onclick="closePopup()">×</button>
-        <div id="popupInner"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- MAP SECTION -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
 <section class="map-section" id="peta">
   <div class="container">
     <div class="reveal">
       <div class="sec-tag">Peta Interaktif</div>
       <h2 class="sec-title">Peta Wonogiri — 60+ Lokasi Real</h2>
-      <p class="sec-sub">Cari & filter lokasi, klik pin untuk detail. Scroll zoom, drag untuk geser peta.</p>
+      <p class="sec-sub">Klik pin untuk detail. Scroll untuk zoom, drag untuk geser.</p>
     </div>
-    <div class="map-toolbar">
+    <div class="map-toolbar reveal">
       <div class="map-search-wrap">
-        <input type="text" id="mapSearch" placeholder="🔍  Cari lokasi, kecamatan, kategori..." autocomplete="off" oninput="onSearch(this.value)" />
-        <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
+        <input type="text" id="mapSearch" placeholder="🔍  Cari lokasi, kecamatan, kategori..." autocomplete="off" oninput="onMapSearch(this.value)" />
+        <button class="search-clear" id="searchClear" onclick="clearMapSearch()">×</button>
       </div>
       <div class="filter-scroll">
-        <button class="mf-btn active" onclick="setFilter('semua',this)">Semua</button>
-        <button class="mf-btn" onclick="setFilter('waduk',this)">💧 Waduk</button>
-        <button class="mf-btn" onclick="setFilter('pantai',this)">🏄 Pantai</button>
-        <button class="mf-btn" onclick="setFilter('bukit',this)">⛰ Bukit</button>
-        <button class="mf-btn" onclick="setFilter('goa',this)">🦇 Goa</button>
-        <button class="mf-btn" onclick="setFilter('airterjun',this)">💦 Air Terjun</button>
-        <button class="mf-btn" onclick="setFilter('kuliner',this)">🍽 Kuliner</button>
-        <button class="mf-btn" onclick="setFilter('kafe',this)">☕ Kafe</button>
-        <button class="mf-btn" onclick="setFilter('oleholeh',this)">🛍 Oleh-oleh</button>
-        <button class="mf-btn" onclick="setFilter('kerajinan',this)">🎨 Kerajinan</button>
-        <button class="mf-btn" onclick="setFilter('budaya',this)">🏛 Budaya</button>
-        <button class="mf-btn" onclick="setFilter('keluarga',this)">👨‍👩‍👧 Keluarga</button>
+        <button class="mf-btn active" onclick="setMapFilter('semua',this)">Semua</button>
+        <button class="mf-btn" onclick="setMapFilter('waduk',this)">💧 Waduk</button>
+        <button class="mf-btn" onclick="setMapFilter('pantai',this)">🏄 Pantai</button>
+        <button class="mf-btn" onclick="setMapFilter('bukit',this)">⛰ Bukit</button>
+        <button class="mf-btn" onclick="setMapFilter('goa',this)">🦇 Goa</button>
+        <button class="mf-btn" onclick="setMapFilter('airterjun',this)">💦 Air Terjun</button>
+        <button class="mf-btn" onclick="setMapFilter('kuliner',this)">🍽 Kuliner</button>
+        <button class="mf-btn" onclick="setMapFilter('kafe',this)">☕ Kafe</button>
+        <button class="mf-btn" onclick="setMapFilter('oleholeh',this)">🛍 Oleh-oleh</button>
+        <button class="mf-btn" onclick="setMapFilter('kerajinan',this)">🎨 Kerajinan</button>
+        <button class="mf-btn" onclick="setMapFilter('budaya',this)">🏛 Budaya</button>
+        <button class="mf-btn" onclick="setMapFilter('keluarga',this)">👨‍👩‍👧 Keluarga</button>
       </div>
     </div>
-    <div class="map-wrap">
-      <canvas id="wMap" style="width:100%;height:580px;display:block;background:#1a2e1a;cursor:grab"></canvas>
-      <div class="map-zoom-btns">
-        <button class="mzb" onclick="zoomMap(1)" title="Zoom In">+</button>
-        <button class="mzb" onclick="zoomMap(-1)" title="Zoom Out">−</button>
-        <button class="mzb" onclick="resetMap()" title="Reset" style="font-size:11px">⌂</button>
-      </div>
-      <div class="map-result-count" id="resultCount">60 lokasi</div>
-      <div class="map-popup" id="mapPopup">
-        <button class="popup-close" onclick="closePopup()">×</button>
-        <div id="popupInner"></div>
-      </div>
+    <div class="map-wrap reveal" style="border-radius:12px;overflow:hidden;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.45);margin-top:1.5rem">
+      <div id="leafletMap" style="width:100%;height:540px;"></div>
+      <div id="mapCount" style="position:absolute;top:12px;left:60px;z-index:1000;background:rgba(20,30,20,0.85);color:#C8922A;font-size:.72rem;padding:4px 10px;border-radius:6px;border:1px solid rgba(200,146,42,0.25);pointer-events:none;backdrop-filter:blur(4px)">59 lokasi</div>
     </div>
   </div>
 </section>
+
 <!-- ROUTES -->
 <section class="routes" id="rute">
   <div class="container">
@@ -1066,458 +1027,170 @@
   }
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-  // ════════════════════════════════════════════════════════
-  //  MAP ENGINE — OSM tiles + vector fallback, bug-fixed
-  // ════════════════════════════════════════════════════════
+  // ══════════════════════════════════════════
+  // LEAFLET MAP — works everywhere, no CORS
+  // ══════════════════════════════════════════
 
-  // ── 60+ Places data ──
   const PLACES = [
-    {name:'Gajah Mungkur (OW)',cat:'waduk',kec:'Kec. Wonogiri',lat:-7.85551,lng:110.910316,r:4.2,rv:10146,e:'🌊',c:'#1A9E7A',d:'Ikon Wonogiri — perahu, jembatan kaca, paralayang, waterboom, mini zoo. Buka 08–17. Tiket Rp 15.000.'},
-    {name:'Waduk Gajah Mungkur',cat:'waduk',kec:'Kec. Wonogiri',lat:-7.8975518,lng:110.8970163,r:4.4,rv:873,e:'💧',c:'#0D7F5C',d:'Bendungan Bengawan Solo 8.800 ha. Diresmikan Presiden Soeharto 17 Nov 1981.'},
-    {name:'Pantai Gading Purba',cat:'waduk',kec:'Kec. Wonogiri',lat:-7.850997,lng:110.916772,r:4.6,rv:1990,e:'🏖',c:'#1DB88A',d:'Spot tepi waduk — sewa perahu, resto ikan bakar, romantis untuk sunset. Buka 08–18.'},
-    {name:'Golden Resto Wonogiri',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8569204,lng:110.9054253,r:4.6,rv:1176,e:'🍽',c:'#B8892A',d:'Resto premium tepi waduk — menu ikan gurami, view Gajah Mungkur. Buka 09–22.'},
-    {name:'Pak Glinding',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8593162,lng:110.9034284,r:4.2,rv:2184,e:'🐟',c:'#A07040',d:'RM legendaris tepi waduk — ikan bakar bumbu rujak, kelapa muda. Buka 08–20.'},
-    {name:'RM Sari Raras 2',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8576749,lng:110.9047609,r:4.6,rv:2140,e:'🍛',c:'#9B7030',d:'Warung lesehan tepi waduk — nila goreng/bakar, sambal terasi. Buka 07–19.'},
-    {name:'Pantai Nampu',cat:'pantai',kec:'Kec. Paranggupito',lat:-8.2101472,lng:110.9027687,r:4.5,rv:4272,e:'🏄',c:'#1A8B6A',d:'Pantai pasir putih tersembunyi — sepi, alami, GRATIS masuk. Ombak bagus untuk surfing.'},
-    {name:'Pantai Kwaru Gunturharjo',cat:'pantai',kec:'Kec. Paranggupito',lat:-8.2111416,lng:110.8970096,r:4.6,rv:255,e:'🌴',c:'#0D6F5C',d:'Pantai tersembunyi di sebelah Nampu — terasa seperti pantai pribadi, gratis.'},
-    {name:'Pantai Kali Mirah',cat:'pantai',kec:'Kec. Paranggupito',lat:-8.2055724,lng:110.8717126,r:4.4,rv:146,e:'🌊',c:'#1A7B5A',d:'Pantai rocky dengan pemandangan laut selatan dramatis. Jalan kaki 1–1.5 km dari parkir.'},
-    {name:'Bukit Cumbri',cat:'bukit',kec:'Kec. Purwantoro',lat:-7.840745,lng:111.305882,r:4.6,rv:1952,e:'🥾',c:'#3B8D11',d:'Trekking 45–60 menit, sunrise/sunset spektakuler, monyet liar di jalur. Buka 24 jam.'},
-    {name:'Jalur Cumbri Pagerukir',cat:'bukit',kec:'Kec. Purwantoro',lat:-7.8420722,lng:111.2990795,r:4.3,rv:127,e:'🗻',c:'#2E7A10',d:'Jalur trekking via Pagerukir — sabana luas, pemandangan 360°, seru untuk pendaki pemula.'},
-    {name:'Gunung Kelir',cat:'bukit',kec:'Kec. Sidoharjo',lat:-7.8965643,lng:111.0345764,r:4.6,rv:105,e:'⛰',c:'#3B6D11',d:'Trek ringan dengan view Gajah Mungkur dari timur — kabut pagi yang spektakuler.'},
-    {name:'Bukit Sejati',cat:'bukit',kec:'Kec. Sidoharjo',lat:-7.8935435,lng:111.0380784,r:4.6,rv:50,e:'🌄',c:'#2C7A11',d:'Trek 20 menit — view Gunung Lawu + Waduk Gajah Mungkur. Terbaik saat sunrise.'},
-    {name:'Puncak Dewa Dewi',cat:'bukit',kec:'Kec. Pracimantoro',lat:-8.0916967,lng:110.8599133,r:4.6,rv:284,e:'🏔',c:'#3A6B22',d:'Puncak karst selatan — udara segar, jalan menantang (40°), view laut selatan. Gratis.'},
-    {name:'Bukit Widodaren',cat:'bukit',kec:'Kec. Selogiri',lat:-7.759274,lng:110.905949,r:4.5,rv:52,e:'🌿',c:'#2D8D22',d:'Perbukitan dengan padang pasir dan view indah. Nuansa Bromo versi mini.'},
-    {name:'Bukit Glodakan',cat:'bukit',kec:'Kec. Wonogiri',lat:-7.771897,lng:110.921644,r:4.2,rv:19,e:'🌅',c:'#4A7D22',d:'Bukit alami — cocok untuk piknik, sunrise & sunset indah dari atas.'},
-    {name:'Watu Cenik',cat:'bukit',kec:'Kec. Wonogiri',lat:-7.8498856,lng:110.9129708,r:4.6,rv:432,e:'🪨',c:'#2DB890',d:'Bukit pandang view 180° Waduk Gajah Mungkur. Buka 07–18.'},
-    {name:'Puncak Joglo',cat:'bukit',kec:'Kec. Wonogiri',lat:-7.8450954,lng:110.8964701,r:4.5,rv:1000,e:'🗻',c:'#1A9E7A',d:'View 360° Waduk Gajah Mungkur dari puncak bukit. Terbaik saat sunrise. Buka 09–18.'},
-    {name:'Goa Putri Kencana',cat:'goa',kec:'Kec. Pracimantoro',lat:-8.0194815,lng:110.7931649,r:4.2,rv:142,e:'🦇',c:'#3C5D8B',d:'Gua karst Geopark Sewu — stalaktit & stalagmit alami. Buka 08–15.30.'},
-    {name:'Goa Tembus Pracimantoro',cat:'goa',kec:'Kec. Pracimantoro',lat:-8.0399453,lng:110.7837306,r:4.3,rv:123,e:'🕳',c:'#2C4D7B',d:'Gua yang bisa dimasuki dua arah — stalaktit, sungai bawah tanah. Dekat Museum Karst.'},
-    {name:'Goa Potro Bunder',cat:'goa',kec:'Kec. Pracimantoro',lat:-8.0441911,lng:110.7801143,r:4.2,rv:23,e:'🗿',c:'#2A4A6B',d:'Dua gua menyatu — ±500m, lubang menuju langit di tengah. Tempat meditasi.'},
-    {name:'GOA RESI Bulukerto',cat:'goa',kec:'Kec. Bulukerto',lat:-7.7434322,lng:111.2046892,r:4.6,rv:1213,e:'🌿',c:'#3B6D8B',d:'Wisata alam gua + bukit view indah. Buka 08–17. Cocok untuk keluarga.'},
-    {name:'Air Terjun Girimanik',cat:'airterjun',kec:'Kec. Slogohimo',lat:-7.725029,lng:111.1695883,r:4.5,rv:404,e:'💦',c:'#2A8B6A',d:'Air terjun di hutan Slogohimo — alam hijau, suara air, cocok refreshing.'},
-    {name:'Air Terjun Banyu Nibo',cat:'airterjun',kec:'Kec. Manyaran',lat:-7.8957373,lng:110.7772131,r:4.5,rv:224,e:'🌊',c:'#1A7B5C',d:'Air terjun tersembunyi — akses via sawah, pemandangan seperti Vietnam. Wajib dicoba!'},
-    {name:'Air Terjun Sanginan',cat:'airterjun',kec:'Kec. Purwantoro',lat:-7.8328951,lng:111.2933402,r:4.3,rv:92,e:'💧',c:'#2D9E72',d:'Air terjun sepi — air jernih, bisa berenang, suasana damai. Buka 24 jam.'},
-    {name:'Air Terjun Claket',cat:'airterjun',kec:'Kec. Purwantoro',lat:-7.8610395,lng:111.2276422,r:4.0,rv:24,e:'🌿',c:'#3A8860',d:'Tiga air terjun bertingkat — pemandangan desa pegunungan yang masih alami.'},
-    {name:'Curug Kemukus',cat:'airterjun',kec:'Kec. Karangtengah',lat:-8.0552667,lng:111.0985195,r:4.2,rv:43,e:'🌀',c:'#1A9B68',d:'Curug tersembunyi — indah di foto dari atas, trek menantang.'},
-    {name:'Niagara Bed Wonogiri',cat:'airterjun',kec:'Kec. Selogiri',lat:-7.8232692,lng:110.8681803,r:4.5,rv:120,e:'🏞',c:'#2DB86A',d:'Air terjun bersih di Selogiri — gratis masuk, masih sangat alami.'},
-    {name:'KOITO BATUGA',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8188715,lng:110.9163779,r:4.8,rv:5175,e:'🍃',c:'#2A8B3A',d:'Resto nature keluarga terbaik Wonogiri — konsep alam hijau, iga bakar & wedang rempah. Buka 09.30–22.'},
-    {name:'RM Prasmanan Pak To',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8136059,lng:110.9584006,r:4.4,rv:1009,e:'🍽',c:'#B87A2A',d:'Prasmanan masakan Jawa lengkap — murah meriah, cocok sarapan dan makan siang. Buka 06–21.'},
-    {name:'Angkringan Sopo Ngiro',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8229974,lng:110.9227458,r:4.4,rv:946,e:'🪔',c:'#A87020',d:'Angkringan heritage bangunan Jawa kuno — jajanan tradisional, suasana syahdu. Buka 08–22.'},
-    {name:'Warung Gudeg Bu Saman',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8151746,lng:110.9234864,r:4.5,rv:111,e:'🌾',c:'#C89030',d:'Gudeg + nasi liwet enak Wonogiri, buka sore–malam. Sambel khas, porsi besar. Buka 16.30–23.'},
-    {name:'Sego Sambel Selera Nusantara',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.8064052,lng:110.9163002,r:4.4,rv:94,e:'🌶',c:'#D07020',d:'Nasi sambel Jawa — cah kangkung & ayam kampung legendaris, interior teak wood. Buka 08–21.'},
-    {name:'Soto Kwali Mbak Nunik',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.81655,lng:110.9230827,r:4.6,rv:17,e:'🍜',c:'#C8922A',d:'Soto kwali segar mulai Rp 7.000 — ayam, sapi, babat, timlo. Buka 17–24.'},
-    {name:'Soto Patung Sapu',cat:'kuliner',kec:'Kec. Wonogiri',lat:-7.814611,lng:110.9221859,r:4.4,rv:157,e:'🥣',c:'#A07840',d:'Soto khas Wonogiri buka sampai 03.00 pagi — gorengan dan sunduk beragam.'},
-    {name:'Sasino Coffee Shop',cat:'kafe',kec:'Kec. Wonogiri',lat:-7.8145656,lng:110.9295141,r:4.6,rv:406,e:'☕',c:'#6B4A2E',d:'Kafe cozy 2 lantai — live music, banyak colokan, kopi enak. Buka 09–24.'},
-    {name:'COZY COFFEE & RESTO',cat:'kafe',kec:'Kec. Wonogiri',lat:-7.811475,lng:110.9499209,r:4.4,rv:573,e:'🫖',c:'#7B5A3E',d:'Kafe cantik pertama di Wonogiri — suasana hangat, makanan enak. Buka 09–23.30.'},
-    {name:'Soko Langit',cat:'kafe',kec:'Kec. Bulukerto',lat:-7.7531318,lng:111.2019855,r:4.2,rv:2001,e:'🏊',c:'#5A7A3E',d:'Kolam renang + kafe dengan background Gunung Lawu spektakuler. Buka 07–17.'},
-    {name:'1/5 Coffee',cat:'kafe',kec:'Kec. Wonogiri',lat:-7.8137015,lng:110.9231018,r:4.7,rv:88,e:'☕',c:'#6B4A2A',d:'Kafe estetik indoor/outdoor — latte terbaik Wonogiri, Japanese food. Buka 15–23.'},
-    {name:'Sunny Story Coffee',cat:'kafe',kec:'Kec. Wonogiri',lat:-7.8139927,lng:110.9276702,r:4.2,rv:531,e:'🌤',c:'#7B5A3A',d:'Kafe modern buka malam — kopi, makanan ringan, hangout anak muda. Buka 13–24.'},
-    {name:'NEW LODJI Coffee & Resto',cat:'kafe',kec:'Kec. Selogiri',lat:-7.8057122,lng:110.9076388,r:4.5,rv:158,e:'🏡',c:'#5A4A2A',d:'Kafe konsep rumah lama — kopi nikmat, suasana vintage. Buka 10–22.'},
-    {name:'Mecamocha',cat:'kafe',kec:'Kec. Wonogiri',lat:-7.8166547,lng:110.9381505,r:4.0,rv:92,e:'🎵',c:'#7A502E',d:'Kafe hingga tengah malam — indoor AC, cozy untuk kerja & hangout. Buka 10–24.'},
-    {name:'Oleh-oleh Khas (Waduk)',cat:'oleholeh',kec:'Kec. Wonogiri',lat:-7.8594044,lng:110.9033732,r:4.7,rv:81,e:'🛍',c:'#C83C3C',d:'Tiwul, gatot, kripik, mete — dekat pintu masuk Waduk Gajah Mungkur. Buka 07–20.'},
-    {name:'Pusat Oleh-oleh Sari Rasa',cat:'oleholeh',kec:'Kec. Wonogiri',lat:-7.8142894,lng:110.9237093,r:4.3,rv:126,e:'🥜',c:'#C86A2A',d:'Toko legendaris — mete, wijen, cabuk, emping, intip khas Wonogiri. Buka 06–21.'},
-    {name:'Brownies Thiwool',cat:'oleholeh',kec:'Kec. Ngadirojo',lat:-7.8173287,lng:110.9758257,r:4.9,rv:36,e:'🍫',c:'#9B4A1A',d:'Inovasi oleh-oleh kekinian — brownies dari tepung tiwul singkong, gluten-free. Buka 07–16.'},
-    {name:'Kripik Cap Melati',cat:'oleholeh',kec:'Kec. Ngadirojo',lat:-7.7989575,lng:111.0131114,r:4.8,rv:16,e:'🍟',c:'#C8922A',d:'Kripik pisang & singkong press Bu Sukirah — variatif, renyah, wajib beli. Buka 08–16.30.'},
-    {name:'Oleh-Oleh Onyx Craft',cat:'oleholeh',kec:'Kec. Wonogiri',lat:-7.8216722,lng:110.9179065,r:4.9,rv:8,e:'💎',c:'#B84A2A',d:'Oleh-oleh premium — produk lokal berkonsep local wisdom. Buka 09.30–17.'},
-    {name:'Pusat Oleh-oleh Haji & Umrah',cat:'oleholeh',kec:'Kec. Wonogiri',lat:-7.8127493,lng:110.9562786,r:4.9,rv:37,e:'🌙',c:'#8B4A1A',d:'Kurma, madu, herbal, aksesoris tanah suci — harga bersaing. Buka 08–16.'},
-    {name:'Sentra Batik Wonogiren',cat:'kerajinan',kec:'Kec. Wonogiri',lat:-7.8198071,lng:110.9231936,r:4.6,rv:29,e:'🎨',c:'#7B3D8B',d:'Sentra batik di pusat kota — batik tulis, cap, kombinasi, motif khas Wonogiri. Buka 08–17.'},
-    {name:'TSP Batik Wonogiren',cat:'kerajinan',kec:'Kec. Tirtomoyo',lat:-7.9462142,lng:111.0577415,r:4.7,rv:57,e:'🖌',c:'#8B4D9B',d:'Batik tulis tangan premium Tirtomoyo — motif langka, produksi terbatas. Buka 08–17.'},
-    {name:'Batik Ciprat Karya Barokah',cat:'kerajinan',kec:'Kec. Kismantoro',lat:-7.9256725,lng:111.2468364,r:5.0,rv:45,e:'✨',c:'#9B3D8B',d:'Batik ciprat karya penyandang disabilitas — unik, one-of-one, harga terjangkau. Buka 09–15.'},
-    {name:'SIDOBATIK Ngadirojo',cat:'kerajinan',kec:'Kec. Ngadirojo',lat:-7.795682,lng:111.009522,r:5.0,rv:25,e:'🧵',c:'#7B4D9B',d:'Batik custom sesuai pesanan — motif bebas pilihan, kualitas tinggi. Buka 08–16.'},
-    {name:'Rifky Batik Store',cat:'kerajinan',kec:'Kec. Tirtomoyo',lat:-7.9350714,lng:111.0260546,r:4.6,rv:41,e:'👘',c:'#6B3D8B',d:'Toko batik rumahan — kain & kemeja siap pakai, pilihan motif lengkap, harga murah.'},
-    {name:'Kerajinan Bambu Manyaran',cat:'kerajinan',kec:'Kec. Manyaran',lat:-7.8194057,lng:110.8142623,r:4.7,rv:3,e:'🎋',c:'#3B7D11',d:'Sentra industri kerajinan bambu — produk unik tangan pengrajin lokal Manyaran.'},
-    {name:'Kahyangan Dlepih',cat:'budaya',kec:'Kec. Tirtomoyo',lat:-7.9729649,lng:111.0755517,r:4.7,rv:279,e:'🏛',c:'#8B5A3C',d:'Situs spiritual — tempat bertapa Panembahan Senopati. Suasana damai, sungai jernih.'},
-    {name:'Masjid Tiban Wonokerso',cat:'budaya',kec:'Kec. Baturetno',lat:-7.9472174,lng:110.9356551,r:4.8,rv:238,e:'🕌',c:'#4A7B5A',d:'Masjid bersejarah ratusan tahun — nilai spiritual tinggi, arsitektur kuno. Buka 24 jam.'},
-    {name:'Masjid Agung At Taqwa',cat:'budaya',kec:'Kec. Wonogiri',lat:-7.8146084,lng:110.9250435,r:4.7,rv:509,e:'🕌',c:'#3A6B4A',d:'Masjid agung kota Wonogiri dengan AC — bersih, nyaman, lokasi strategis. Buka 24 jam.'},
-    {name:'Masjid Tiban Bakalan',cat:'budaya',kec:'Kec. Purwantoro',lat:-7.8179059,lng:111.2846567,r:4.5,rv:99,e:'⛩',c:'#5A7B4A',d:'Masjid tua yang konon muncul sendiri (tiban) — disakralkan warga, telah direnovasi.'},
-    {name:'Telaga Claket',cat:'keluarga',kec:'Kec. Selogiri',lat:-7.7581614,lng:110.9079929,r:4.1,rv:1600,e:'🌿',c:'#2DB880',d:'Telaga cantik — tiket Rp 10.000 include minuman. Prewedding & piknik keluarga. Buka 06–18.'},
+    {name:'Gajah Mungkur (OW)',     cat:'waduk',    kec:'Kec. Wonogiri',     lat:-7.85551,   lng:110.910316,  r:4.2,rv:10146,e:'🌊',c:'#1A9E7A',d:'Ikon Wonogiri — perahu, jembatan kaca, paralayang, waterboom, mini zoo. Buka 08–17. Tiket Rp 15.000.'},
+    {name:'Waduk Gajah Mungkur',    cat:'waduk',    kec:'Kec. Wonogiri',     lat:-7.8975518, lng:110.8970163, r:4.4,rv:873,  e:'💧',c:'#0D7F5C',d:'Bendungan Bengawan Solo 8.800 ha. Diresmikan Presiden Soeharto 17 Nov 1981.'},
+    {name:'Pantai Gading Purba',    cat:'waduk',    kec:'Kec. Wonogiri',     lat:-7.850997,  lng:110.916772,  r:4.6,rv:1990, e:'🏖',c:'#1DB88A',d:'Spot tepi waduk — sewa perahu, resto ikan bakar, romantis untuk sunset. Buka 08–18.'},
+    {name:'Golden Resto Wonogiri',  cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8569204, lng:110.9054253, r:4.6,rv:1176, e:'🍽',c:'#B8892A',d:'Resto premium tepi waduk — menu ikan gurami, view Gajah Mungkur. Buka 09–22.'},
+    {name:'Pak Glinding',           cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8593162, lng:110.9034284, r:4.2,rv:2184, e:'🐟',c:'#A07040',d:'RM legendaris tepi waduk — ikan bakar bumbu rujak, kelapa muda. Buka 08–20.'},
+    {name:'RM Sari Raras 2',        cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8576749, lng:110.9047609, r:4.6,rv:2140, e:'🍛',c:'#9B7030',d:'Warung lesehan tepi waduk — nila goreng/bakar, sambal terasi. Buka 07–19.'},
+    {name:'Pantai Nampu',           cat:'pantai',   kec:'Kec. Paranggupito', lat:-8.2101472, lng:110.9027687, r:4.5,rv:4272, e:'🏄',c:'#1A8B6A',d:'Pantai pasir putih tersembunyi — sepi, alami, GRATIS. Ombak bagus untuk surfing.'},
+    {name:'Pantai Kwaru Gunturharjo',cat:'pantai',  kec:'Kec. Paranggupito', lat:-8.2111416, lng:110.8970096, r:4.6,rv:255,  e:'🌴',c:'#0D6F5C',d:'Pantai tersembunyi di sebelah Nampu — terasa seperti pantai pribadi. Gratis.'},
+    {name:'Pantai Kali Mirah',      cat:'pantai',   kec:'Kec. Paranggupito', lat:-8.2055724, lng:110.8717126, r:4.4,rv:146,  e:'🌊',c:'#1A7B5A',d:'Pantai rocky dramatis. Jalan kaki 1–1.5 km dari parkir.'},
+    {name:'Bukit Cumbri',           cat:'bukit',    kec:'Kec. Purwantoro',   lat:-7.840745,  lng:111.305882,  r:4.6,rv:1952, e:'🥾',c:'#3B8D11',d:'Trekking 45–60 menit, sunrise/sunset spektakuler, monyet liar di jalur.'},
+    {name:'Jalur Cumbri Pagerukir', cat:'bukit',    kec:'Kec. Purwantoro',   lat:-7.8420722, lng:111.2990795, r:4.3,rv:127,  e:'🗻',c:'#2E7A10',d:'Trek via Pagerukir — sabana luas, pemandangan 360°.'},
+    {name:'Gunung Kelir',           cat:'bukit',    kec:'Kec. Sidoharjo',    lat:-7.8965643, lng:111.0345764, r:4.6,rv:105,  e:'⛰',c:'#3B6D11',d:'Trek ringan dengan view Gajah Mungkur dari timur.'},
+    {name:'Bukit Sejati',           cat:'bukit',    kec:'Kec. Sidoharjo',    lat:-7.8935435, lng:111.0380784, r:4.6,rv:50,   e:'🌄',c:'#2C7A11',d:'Trek 20 menit — view Gunung Lawu + Waduk Gajah Mungkur. Terbaik saat sunrise.'},
+    {name:'Puncak Dewa Dewi',       cat:'bukit',    kec:'Kec. Pracimantoro', lat:-8.0916967, lng:110.8599133, r:4.6,rv:284,  e:'🏔',c:'#3A6B22',d:'Puncak karst selatan — udara segar, view laut selatan.'},
+    {name:'Bukit Widodaren',        cat:'bukit',    kec:'Kec. Selogiri',     lat:-7.759274,  lng:110.905949,  r:4.5,rv:52,   e:'🌿',c:'#2D8D22',d:'Perbukitan dengan padang pasir dan view indah.'},
+    {name:'Watu Cenik',             cat:'bukit',    kec:'Kec. Wonogiri',     lat:-7.8498856, lng:110.9129708, r:4.6,rv:432,  e:'🪨',c:'#2DB890',d:'Bukit pandang view 180° Waduk Gajah Mungkur. Buka 07–18.'},
+    {name:'Puncak Joglo',           cat:'bukit',    kec:'Kec. Wonogiri',     lat:-7.8450954, lng:110.8964701, r:4.5,rv:1000, e:'🗻',c:'#1A9E7A',d:'View 360° Waduk Gajah Mungkur. Terbaik saat sunrise.'},
+    {name:'Goa Putri Kencana',      cat:'goa',      kec:'Kec. Pracimantoro', lat:-8.0194815, lng:110.7931649, r:4.2,rv:142,  e:'🦇',c:'#3C5D8B',d:'Gua karst Geopark Sewu — stalaktit & stalagmit. Buka 08–15.30.'},
+    {name:'Goa Tembus Pracimantoro',cat:'goa',      kec:'Kec. Pracimantoro', lat:-8.0399453, lng:110.7837306, r:4.3,rv:123,  e:'🕳',c:'#2C4D7B',d:'Gua yang bisa dimasuki dua arah — sungai bawah tanah. Dekat Museum Karst.'},
+    {name:'Goa Potro Bunder',       cat:'goa',      kec:'Kec. Pracimantoro', lat:-8.0441911, lng:110.7801143, r:4.2,rv:23,   e:'🗿',c:'#2A4A6B',d:'Dua gua menyatu ±500m, lubang menuju langit di tengah.'},
+    {name:'GOA RESI Bulukerto',     cat:'goa',      kec:'Kec. Bulukerto',    lat:-7.7434322, lng:111.2046892, r:4.6,rv:1213, e:'🌿',c:'#3B6D8B',d:'Wisata alam gua + bukit view indah. Buka 08–17.'},
+    {name:'Air Terjun Girimanik',   cat:'airterjun',kec:'Kec. Slogohimo',    lat:-7.725029,  lng:111.1695883, r:4.5,rv:404,  e:'💦',c:'#2A8B6A',d:'Air terjun di hutan Slogohimo — alam hijau, cocok refreshing.'},
+    {name:'Air Terjun Banyu Nibo',  cat:'airterjun',kec:'Kec. Manyaran',     lat:-7.8957373, lng:110.7772131, r:4.5,rv:224,  e:'🌊',c:'#1A7B5C',d:'Air terjun tersembunyi — akses via sawah, pemandangan seperti Vietnam.'},
+    {name:'Air Terjun Sanginan',    cat:'airterjun',kec:'Kec. Purwantoro',   lat:-7.8328951, lng:111.2933402, r:4.3,rv:92,   e:'💧',c:'#2D9E72',d:'Air terjun sepi — air jernih, bisa berenang. Buka 24 jam.'},
+    {name:'Curug Kemukus',          cat:'airterjun',kec:'Kec. Karangtengah', lat:-8.0552667, lng:111.0985195, r:4.2,rv:43,   e:'🌀',c:'#1A9B68',d:'Curug tersembunyi — trek menantang, indah dari atas.'},
+    {name:'Niagara Bed Wonogiri',   cat:'airterjun',kec:'Kec. Selogiri',     lat:-7.8232692, lng:110.8681803, r:4.5,rv:120,  e:'🏞',c:'#2DB86A',d:'Air terjun bersih — gratis masuk, masih sangat alami.'},
+    {name:'KOITO BATUGA',           cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8188715, lng:110.9163779, r:4.8,rv:5175, e:'🍃',c:'#2A8B3A',d:'Resto nature terbaik Wonogiri — konsep alam hijau, iga bakar. Buka 09.30–22.'},
+    {name:'RM Prasmanan Pak To',    cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8136059, lng:110.9584006, r:4.4,rv:1009, e:'🍽',c:'#B87A2A',d:'Prasmanan masakan Jawa lengkap — murah meriah. Buka 06–21.'},
+    {name:'Angkringan Sopo Ngiro',  cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8229974, lng:110.9227458, r:4.4,rv:946,  e:'🪔',c:'#A87020',d:'Angkringan heritage bangunan Jawa kuno. Buka 08–22.'},
+    {name:'Warung Gudeg Bu Saman',  cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.8151746, lng:110.9234864, r:4.5,rv:111,  e:'🌾',c:'#C89030',d:'Gudeg + nasi liwet enak, buka sore–malam. Buka 16.30–23.'},
+    {name:'Soto Kwali Mbak Nunik',  cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.81655,   lng:110.9230827, r:4.6,rv:17,   e:'🍜',c:'#C8922A',d:'Soto kwali segar mulai Rp 7.000. Buka 17–24.'},
+    {name:'Soto Patung Sapu',       cat:'kuliner',  kec:'Kec. Wonogiri',     lat:-7.814611,  lng:110.9221859, r:4.4,rv:157,  e:'🥣',c:'#A07840',d:'Soto khas Wonogiri buka sampai 03.00 pagi.'},
+    {name:'Sasino Coffee Shop',     cat:'kafe',     kec:'Kec. Wonogiri',     lat:-7.8145656, lng:110.9295141, r:4.6,rv:406,  e:'☕',c:'#6B4A2E',d:'Kafe cozy 2 lantai — live music, kopi enak. Buka 09–24.'},
+    {name:'COZY COFFEE & RESTO',    cat:'kafe',     kec:'Kec. Wonogiri',     lat:-7.811475,  lng:110.9499209, r:4.4,rv:573,  e:'🫖',c:'#7B5A3E',d:'Kafe cantik — suasana hangat, makanan enak. Buka 09–23.30.'},
+    {name:'Soko Langit',            cat:'kafe',     kec:'Kec. Bulukerto',    lat:-7.7531318, lng:111.2019855, r:4.2,rv:2001, e:'🏊',c:'#5A7A3E',d:'Kolam renang + kafe dengan background Gunung Lawu. Buka 07–17.'},
+    {name:'1/5 Coffee',             cat:'kafe',     kec:'Kec. Wonogiri',     lat:-7.8137015, lng:110.9231018, r:4.7,rv:88,   e:'☕',c:'#6B4A2A',d:'Kafe estetik — latte terbaik Wonogiri. Buka 15–23.'},
+    {name:'Sunny Story Coffee',     cat:'kafe',     kec:'Kec. Wonogiri',     lat:-7.8139927, lng:110.9276702, r:4.2,rv:531,  e:'🌤',c:'#7B5A3A',d:'Kafe modern buka malam — kopi & makanan ringan. Buka 13–24.'},
+    {name:'NEW LODJI Coffee & Resto',cat:'kafe',    kec:'Kec. Selogiri',     lat:-7.8057122, lng:110.9076388, r:4.5,rv:158,  e:'🏡',c:'#5A4A2A',d:'Kafe konsep rumah lama — kopi nikmat, suasana vintage. Buka 10–22.'},
+    {name:'Oleh-oleh Khas (Waduk)', cat:'oleholeh', kec:'Kec. Wonogiri',     lat:-7.8594044, lng:110.9033732, r:4.7,rv:81,   e:'🛍',c:'#C83C3C',d:'Tiwul, gatot, kripik, mete — dekat pintu masuk Waduk. Buka 07–20.'},
+    {name:'Pusat Oleh-oleh Sari Rasa',cat:'oleholeh',kec:'Kec. Wonogiri',    lat:-7.8142894, lng:110.9237093, r:4.3,rv:126,  e:'🥜',c:'#C86A2A',d:'Toko legendaris — mete, wijen, cabuk, emping, intip. Buka 06–21.'},
+    {name:'Brownies Thiwool',       cat:'oleholeh', kec:'Kec. Ngadirojo',    lat:-7.8173287, lng:110.9758257, r:4.9,rv:36,   e:'🍫',c:'#9B4A1A',d:'Brownies dari tepung tiwul singkong — gluten-free, unik. Buka 07–16.'},
+    {name:'Kripik Cap Melati',      cat:'oleholeh', kec:'Kec. Ngadirojo',    lat:-7.7989575, lng:111.0131114, r:4.8,rv:16,   e:'🍟',c:'#C8922A',d:'Kripik pisang & singkong Bu Sukirah — renyah, wajib beli. Buka 08–16.30.'},
+    {name:'Sentra Batik Wonogiren', cat:'kerajinan',kec:'Kec. Wonogiri',     lat:-7.8198071, lng:110.9231936, r:4.6,rv:29,   e:'🎨',c:'#7B3D8B',d:'Sentra batik kota — tulis, cap, kombinasi, motif khas. Buka 08–17.'},
+    {name:'TSP Batik Wonogiren',    cat:'kerajinan',kec:'Kec. Tirtomoyo',    lat:-7.9462142, lng:111.0577415, r:4.7,rv:57,   e:'🖌',c:'#8B4D9B',d:'Batik tulis tangan premium — motif langka. Buka 08–17.'},
+    {name:'Batik Ciprat Karya Barokah',cat:'kerajinan',kec:'Kec. Kismantoro',lat:-7.9256725, lng:111.2468364, r:5.0,rv:45,   e:'✨',c:'#9B3D8B',d:'Batik ciprat karya penyandang disabilitas — one-of-one. Buka 09–15.'},
+    {name:'SIDOBATIK Ngadirojo',    cat:'kerajinan',kec:'Kec. Ngadirojo',    lat:-7.795682,  lng:111.009522,  r:5.0,rv:25,   e:'🧵',c:'#7B4D9B',d:'Batik custom sesuai pesanan. Buka 08–16.'},
+    {name:'Kerajinan Bambu Manyaran',cat:'kerajinan',kec:'Kec. Manyaran',    lat:-7.8194057, lng:110.8142623, r:4.7,rv:3,    e:'🎋',c:'#3B7D11',d:'Sentra kerajinan bambu — produk unik tangan pengrajin lokal.'},
+    {name:'Kahyangan Dlepih',       cat:'budaya',   kec:'Kec. Tirtomoyo',    lat:-7.9729649, lng:111.0755517, r:4.7,rv:279,  e:'🏛',c:'#8B5A3C',d:'Situs spiritual — tempat bertapa Panembahan Senopati.'},
+    {name:'Masjid Tiban Wonokerso', cat:'budaya',   kec:'Kec. Baturetno',    lat:-7.9472174, lng:110.9356551, r:4.8,rv:238,  e:'🕌',c:'#4A7B5A',d:'Masjid bersejarah ratusan tahun. Buka 24 jam.'},
+    {name:'Masjid Agung At Taqwa',  cat:'budaya',   kec:'Kec. Wonogiri',     lat:-7.8146084, lng:110.9250435, r:4.7,rv:509,  e:'🕌',c:'#3A6B4A',d:'Masjid agung kota Wonogiri — AC, bersih, nyaman. Buka 24 jam.'},
+    {name:'Masjid Tiban Bakalan',   cat:'budaya',   kec:'Kec. Purwantoro',   lat:-7.8179059, lng:111.2846567, r:4.5,rv:99,   e:'⛩',c:'#5A7B4A',d:'Masjid tua yang konon muncul sendiri — disakralkan warga.'},
+    {name:'Telaga Claket',          cat:'keluarga', kec:'Kec. Selogiri',     lat:-7.7581614, lng:110.9079929, r:4.1,rv:1600, e:'🌿',c:'#2DB880',d:'Telaga cantik — tiket Rp 10.000 include minuman. Buka 06–18.'},
+    {name:'Soko Langit Waterpark',  cat:'keluarga', kec:'Kec. Bulukerto',    lat:-7.7531318, lng:111.2019855, r:4.2,rv:2001, e:'🏊',c:'#2A7B5A',d:'Kolam renang view Gunung Lawu spektakuler. Buka 07–17.'},
+    {name:'Bukit Glodakan',         cat:'bukit',    kec:'Kec. Wonogiri',     lat:-7.771897,  lng:110.921644,  r:4.2,rv:19,   e:'🌅',c:'#4A7D22',d:'Bukit alami — sunrise & sunset indah dari atas.'},
+    {name:'Air Terjun Claket',      cat:'airterjun',kec:'Kec. Purwantoro',   lat:-7.8610395, lng:111.2276422, r:4.0,rv:24,   e:'🌿',c:'#3A8860',d:'Tiga air terjun bertingkat — desa pegunungan yang alami.'},
   ];
 
-  // ── Category labels ──
   const CAT_LABELS = {
-    waduk:'Wisata Waduk', pantai:'Pantai', bukit:'Bukit & Gunung',
-    goa:'Goa & Karst', airterjun:'Air Terjun', kuliner:'Kuliner',
-    kafe:'Kafe & Ngopi', oleholeh:'Oleh-oleh', kerajinan:'Kerajinan & Batik',
-    budaya:'Budaya & Religi', keluarga:'Wisata Keluarga'
+    waduk:'Wisata Waduk',pantai:'Pantai',bukit:'Bukit & Gunung',
+    goa:'Goa & Karst',airterjun:'Air Terjun',kuliner:'Kuliner',
+    kafe:'Kafe & Ngopi',oleholeh:'Oleh-oleh',kerajinan:'Kerajinan & Batik',
+    budaya:'Budaya & Religi',keluarga:'Wisata Keluarga'
   };
 
-  // ── State ──
-  let activeFilter = 'semua';
-  let searchQuery  = '';
-  let visiblePlaces = [...PLACES];
+  // ── Leaflet map ──
+  let leafletMap, markers = [], activeMapFilter = 'semua', mapSearch = '';
 
-  // ── Tile math ──
-  const π = Math.PI;
-  function lng2t(lng,z){ return (lng+180)/360*(1<<z); }
-  function lat2t(lat,z){ const φ=lat*π/180; return (1-Math.log(Math.tan(φ)+1/Math.cos(φ))/π)/2*(1<<z); }
-  function t2lat(y,z){ const n=π-2*π*y/(1<<z); return 180/π*Math.atan(.5*(Math.exp(n)-Math.exp(-n))); }
-  function t2lng(x,z){ return x/(1<<z)*360-180; }
-
-  // ── Canvas setup ──
-  const cvs = document.getElementById('wMap');
-  const ctx = cvs.getContext('2d');
-  const popup  = document.getElementById('mapPopup');
-  const popIn  = document.getElementById('popupInner');
-  const wrap   = cvs.parentElement;
-  const rcEl   = document.getElementById('resultCount');
-  const TS = 256;
-  let zoom = 10;
-  let camX, camY; // tile coords of canvas center
-  let dragging=false,dsx=0,dsy=0,csx=0,csy=0;
-  let hovered=-1;
-  const CACHE = {};
-
-  function initCam(){ camX=lng2t(110.97,zoom); camY=lat2t(-7.97,zoom); }
-  function initCvs(){
-    const rect = wrap.getBoundingClientRect();
-    cvs.width  = Math.max(300, rect.width || wrap.offsetWidth || wrap.clientWidth || 900);
-    cvs.height = 580;
-    cvs.style.width  = '100%';
-    cvs.style.height = '580px';
-  }
-
-  function t2c(tx,ty){ return [(tx-camX)*TS+cvs.width/2, (ty-camY)*TS+cvs.height/2]; }
-  function c2t(cx,cy){ return [(cx-cvs.width/2)/TS+camX, (cy-cvs.height/2)/TS+camY]; }
-  function ll2c(lng,lat){ return t2c(lng2t(lng,zoom), lat2t(lat,zoom)); }
-
-  // ── Tile loading ──
-  function getTile(x,y,z){
-    const k=z+'/'+x+'/'+y;
-    if(CACHE[k]) return CACHE[k];
-    CACHE[k]='loading';
-    const img=new Image(); img.crossOrigin='anonymous';
-    img.src='https://'+['a','b','c'][(x+y+z)%3]+'.tile.openstreetmap.org/'+z+'/'+x+'/'+y+'.png';
-    img.onload=()=>{ CACHE[k]=img; render(); };
-    img.onerror=()=>{ CACHE[k]='err'; };
-    return null;
-  }
-
-  // ── Draw tiles (BUG FIX: always fill entire canvas first) ──
-  let tilesOK=null;
-  function drawTiles(){
-    // Fill entire canvas with fallback color first — prevents blank areas on zoom
-    ctx.fillStyle='#2a3d2a';
-    ctx.fillRect(0,0,cvs.width,cvs.height);
-
-    const cols=Math.ceil(cvs.width/TS)+3;
-    const rows=Math.ceil(cvs.height/TS)+3;
-    const sx=Math.floor(camX-cols/2);
-    const sy=Math.floor(camY-rows/2);
-    const max=1<<zoom;
-    let loaded=0, errors=0, total=0;
-
-    for(let dx=0;dx<=cols;dx++){
-      for(let dy=0;dy<=rows;dy++){
-        const tx=sx+dx, ty=sy+dy;
-        if(ty<0||ty>=max) continue;
-        const wx=((tx%max)+max)%max;
-        const [px,py]=t2c(tx,ty);
-        // Skip tiles completely off-screen
-        if(px>cvs.width+TS||py>cvs.height+TS||px<-TS||py<-TS) continue;
-        total++;
-        const tile=getTile(wx,ty,zoom);
-        if(tile&&tile!=='loading'&&tile!=='err'){
-          ctx.drawImage(tile,Math.round(px),Math.round(py),TS+1,TS+1);
-          loaded++;
-        } else if(tile==='err'){
-          errors++;
-        }
-      }
-    }
-    if(total>0){
-      if(errors/total>0.6) tilesOK=false;
-      else if(loaded>0) tilesOK=true;
-    }
-    // Light overlay to blend tiles with brand aesthetic
-    if(loaded>0){
-      ctx.fillStyle='rgba(8,15,8,0.22)';
-      ctx.fillRect(0,0,cvs.width,cvs.height);
-    }
-  }
-
-  // ── Vector fallback map ──
-  function drawVector(){
-    const W=cvs.width,H=cvs.height;
-    // Rich terrain background
-    const grad=ctx.createLinearGradient(0,0,0,H);
-    grad.addColorStop(0,'#2e4a2e');
-    grad.addColorStop(0.6,'#344a30');
-    grad.addColorStop(1,'#1a3020');
-    ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
-
-    // Subtle grid (lat/lng lines)
-    ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
-    for(let g=110.7;g<=111.4;g+=0.1){
-      const [x]=ll2c(g,-7.97);
-      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
-    }
-    for(let g=-8.3;g<=-7.6;g+=0.1){
-      const [,y]=ll2c(110.97,g);
-      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
-    }
-    function ll(g,l){ return ll2c(g,l); }
-    function poly(pts,fill,stroke,sw=1){
-      if(!pts.length) return;
-      ctx.beginPath();
-      pts.forEach(([g,l],i)=>{ const [x,y]=ll(g,l); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
-      ctx.closePath();
-      if(fill){ctx.fillStyle=fill;ctx.fill();}
-      if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke();}
-    }
-    function road(pts,color,w,dash=[]){
-      if(pts.length<2)return;
-      ctx.setLineDash(dash);ctx.beginPath();
-      pts.forEach(([g,l],i)=>{ const [x,y]=ll(g,l); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
-      ctx.strokeStyle=color;ctx.lineWidth=w;ctx.stroke();ctx.setLineDash([]);
-    }
-    function lbl(t,g,l,sz,col='rgba(255,255,220,0.8)',bold=false){
-      const [x,y]=ll(g,l);
-      if(x<-60||x>W+60||y<-60||y>H+60)return;
-      ctx.font=(bold?'600 ':'')+sz+'px DM Sans,sans-serif';
-      ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=4;
-      ctx.fillText(t,x,y);ctx.shadowBlur=0;
-    }
-    // Water body - Waduk
-    poly([[110.858,-7.838],[110.878,-7.832],[110.90,-7.833],[110.922,-7.838],[110.933,-7.848],[110.937,-7.862],[110.935,-7.878],[110.928,-7.896],[110.916,-7.912],[110.904,-7.924],[110.890,-7.932],[110.875,-7.932],[110.860,-7.924],[110.848,-7.908],[110.842,-7.888],[110.843,-7.868],[110.850,-7.852],[110.858,-7.838]],'rgba(26,107,150,0.55)','rgba(80,190,220,0.5)',1.5);
-    lbl('Waduk Gajah Mungkur',110.893,-7.884,zoom>=11?12:10,'rgba(120,210,245,0.85)',true);
-    // Samudra
-    const [,sy2]=ll2c(110.9,-8.20); if(sy2>0&&sy2<H){ ctx.fillStyle='rgba(26,80,110,0.35)'; ctx.fillRect(0,sy2,W,H-sy2); lbl('Samudra Hindia',110.9,-8.23,10,'rgba(100,185,215,0.6)',false); }
-    // Jalan nasional
-    road([[110.75,-7.82],[110.85,-7.812],[110.912,-7.812],[110.97,-7.81],[111.00,-7.808]],'#e8c86a',2.5);
-    road([[110.912,-7.82],[110.90,-7.86],[110.892,-7.93],[110.88,-7.98],[110.86,-8.02],[110.80,-8.10]],'#e8c86a',2.2);
-    road([[110.912,-7.82],[110.96,-7.83],[111.03,-7.87],[111.08,-7.93],[111.12,-8.00]],'#e8c86a',2.2);
-    road([[110.912,-7.82],[110.96,-7.815],[111.01,-7.81]],'#f0d080',1.8);
-    road([[110.90,-7.75],[110.912,-7.82]],'#d4b84a',1.5);
-    // Bengawan Solo
-    road([[110.75,-7.79],[110.87,-7.81],[110.876,-7.932],[110.895,-7.98],[110.91,-8.00],[110.97,-8.04],[111.05,-8.05]],'#4a9ec8',2.5);
-    // Towns
-    lbl('WONOGIRI',110.912,-7.812,zoom>=11?13:11,'rgba(255,255,200,0.95)',true);
-    lbl('Selogiri',110.908,-7.760,9);lbl('Ngadirojo',111.010,-7.805,9);lbl('Baturetno',111.10,-7.960,9);
-    lbl('Tirtomoyo',111.068,-7.958,9);lbl('Pracimantoro',110.805,-8.102,9);lbl('Manyaran',110.82,-7.822,9);
-    lbl('Purwantoro',111.26,-7.835,9);lbl('Paranggupito',110.88,-8.185,9);lbl('Bulukerto',111.18,-7.745,9);
-    // Border dashed
-    road([[110.75,-7.70],[111.00,-7.70],[111.38,-7.80],[111.35,-8.05],[111.20,-8.15],[111.00,-8.22],[110.85,-8.26],[110.75,-8.22],[110.72,-7.90],[110.75,-7.70]],'rgba(255,220,100,0.3)',1.5,[5,4]);
-  }
-
-  // ── Pin drawing ──
-  function drawPin(x,y,p,hov){
-    if(x<-50||x>cvs.width+50||y<-50||y>cvs.height+50)return;
-    const r=hov?19:14;
-    ctx.save();
-    ctx.shadowColor='rgba(0,0,0,0.7)';ctx.shadowBlur=hov?18:10;ctx.shadowOffsetY=3;
-    if(hov){ctx.beginPath();ctx.arc(x,y-r,r+7,0,Math.PI*2);ctx.strokeStyle=p.c+'88';ctx.lineWidth=2.5;ctx.stroke();}
-    ctx.beginPath();ctx.arc(x,y-r,r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();
-    ctx.strokeStyle='#fff';ctx.lineWidth=hov?2.5:2;ctx.stroke();
-    ctx.shadowBlur=0;
-    ctx.beginPath();ctx.moveTo(x-5,y-r+2);ctx.lineTo(x+5,y-r+2);ctx.lineTo(x,y+3);
-    ctx.closePath();ctx.fillStyle=p.c;ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;ctx.stroke();
-    ctx.font=(hov?'14':'11')+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=3;
-    ctx.fillText(p.e,x,y-r);
-    ctx.restore();
-  }
-
-  // ── UI overlay ──
-  function drawUI(){
-    ctx.strokeStyle='rgba(200,146,42,0.22)';ctx.lineWidth=2;ctx.strokeRect(1,1,cvs.width-2,cvs.height-2);
-    // Compass
-    const [cx2,cy2]=[40,cvs.height-40];
-    ctx.save();ctx.shadowColor='rgba(0,0,0,0.6)';ctx.shadowBlur=8;
-    ctx.fillStyle='#C8922A';ctx.beginPath();ctx.moveTo(cx2,cy2-18);ctx.lineTo(cx2-5,cy2+2);ctx.lineTo(cx2+5,cy2+2);ctx.closePath();ctx.fill();
-    ctx.fillStyle='rgba(255,255,255,0.25)';ctx.beginPath();ctx.moveTo(cx2,cy2+18);ctx.lineTo(cx2-5,cy2-2);ctx.lineTo(cx2+5,cy2-2);ctx.closePath();ctx.fill();
-    ctx.shadowBlur=0;ctx.fillStyle='#E8B84B';ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText('N',cx2,cy2-21);ctx.restore();
-    // Attribution
-    ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(cvs.width-225,cvs.height-18,225,18);
-    ctx.fillStyle='rgba(255,255,255,0.55)';ctx.font='10px sans-serif';ctx.textAlign='right';ctx.textBaseline='bottom';
-    ctx.fillText('© OpenStreetMap contributors',cvs.width-4,cvs.height-2);
-    // Zoom level
-    ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fillRect(4,cvs.height-20,44,16);
-    ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='10px sans-serif';ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('z='+zoom,7,cvs.height-3);
-  }
-
-  // ── Main render ──
-  function render(){
-    if(!cvs || cvs.width < 10){ if(cvs) initCvs(); return; } // safety guard
-    ctx.clearRect(0,0,cvs.width,cvs.height);
-    // Always draw vector map first as base layer
-    drawVector();
-    // Try tiles as optional overlay (if available)
-    if(tilesOK!==false){ drawTiles(); }
-    // Draw pins on top
-    visiblePlaces.forEach((p,i)=>{
-      const [x,y]=ll2c(p.lng,p.lat);
-      drawPin(x,y,p,hovered===i);
+  function makeIcon(p) {
+    return L.divIcon({
+      className:'',
+      html:`<div style="width:36px;height:36px;border-radius:50% 50% 50% 4px;background:${p.c};border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,0.4);transform:rotate(-45deg)"><span style="transform:rotate(45deg)">${p.e}</span></div>`,
+      iconSize:[36,36],iconAnchor:[18,36],popupAnchor:[0,-40]
     });
-    drawUI();
   }
 
-  // ── Filter & search logic ──
-  function updateVisible(){
-    visiblePlaces = PLACES.filter(p=>{
-      const catOK = activeFilter==='semua' || p.cat===activeFilter;
+  function makePopup(p) {
+    return `<div style="width:230px;font-family:DM Sans,sans-serif">
+      <div style="background:${p.c}22;padding:1rem;text-align:center;font-size:2.2rem">${p.e}</div>
+      <div style="padding:10px 12px 14px">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C8922A;margin-bottom:3px">${CAT_LABELS[p.cat]||p.cat}</div>
+        <div style="font-family:Playfair Display,serif;font-size:.95rem;font-weight:700;margin-bottom:4px">${p.name}</div>
+        <div style="font-size:.72rem;color:#8B6E5A;margin-bottom:6px">📍 ${p.kec} &nbsp;·&nbsp; ★ ${p.r} (${p.rv.toLocaleString()})</div>
+        <div style="font-size:.78rem;color:#5C3D2E;line-height:1.55">${p.d}</div>
+        <div style="font-size:.65rem;color:#bbb;margin-top:6px">${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div>
+      </div>
+    </div>`;
+  }
+
+  function initLeaflet() {
+    if(leafletMap) return;
+    leafletMap = L.map('leafletMap',{center:[-7.97,110.97],zoom:10,zoomControl:true});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom:18,subdomains:'abc'
+    }).addTo(leafletMap);
+    PLACES.forEach(p => {
+      const m = L.marker([p.lat,p.lng],{icon:makeIcon(p)})
+        .bindPopup(makePopup(p),{maxWidth:250,className:'nggonku-popup'})
+        .addTo(leafletMap);
+      m._place = p;
+      markers.push(m);
+    });
+    updateMapCount();
+  }
+
+  function updateMapCount() {
+    const el = document.getElementById('mapCount');
+    const vis = markers.filter(m => {
+      const p = m._place;
+      const catOK = activeMapFilter==='semua'||p.cat===activeMapFilter;
       if(!catOK) return false;
-      if(!searchQuery) return true;
-      const q=searchQuery.toLowerCase();
-      return p.name.toLowerCase().includes(q)||p.kec.toLowerCase().includes(q)||
-             p.d.toLowerCase().includes(q)||(CAT_LABELS[p.cat]||'').toLowerCase().includes(q);
+      if(!mapSearch) return true;
+      const q = mapSearch.toLowerCase();
+      return p.name.toLowerCase().includes(q)||p.kec.toLowerCase().includes(q)||p.d.toLowerCase().includes(q);
     });
-    if(rcEl) rcEl.textContent = visiblePlaces.length + ' lokasi';
-    hovered=-1;
-    render();
+    if(el) el.textContent = vis.length+' lokasi';
   }
 
-  function setFilter(cat,btn){
+  function applyMapFilters() {
+    markers.forEach(m => {
+      const p = m._place;
+      const catOK = activeMapFilter==='semua'||p.cat===activeMapFilter;
+      const q = mapSearch.toLowerCase();
+      const searchOK = !mapSearch||p.name.toLowerCase().includes(q)||p.kec.toLowerCase().includes(q)||p.d.toLowerCase().includes(q);
+      if(catOK && searchOK) { if(!leafletMap.hasLayer(m)) m.addTo(leafletMap); }
+      else { if(leafletMap.hasLayer(m)) leafletMap.removeLayer(m); }
+    });
+    updateMapCount();
+  }
+
+  function setMapFilter(cat,btn) {
     document.querySelectorAll('.mf-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active'); activeFilter=cat; closePopup(); updateVisible();
+    btn.classList.add('active');
+    activeMapFilter=cat; applyMapFilters();
   }
 
-  function onSearch(val){
-    searchQuery=val.trim();
-    const clearBtn=document.getElementById('searchClear');
-    if(clearBtn) clearBtn.style.display=searchQuery?'block':'none';
-    closePopup(); updateVisible();
+  function onMapSearch(val) {
+    mapSearch=val.trim();
+    const cl=document.getElementById('searchClear');
+    if(cl) cl.style.display=mapSearch?'block':'none';
+    applyMapFilters();
   }
-  function clearSearch(){
+  function clearMapSearch() {
     const inp=document.getElementById('mapSearch');
     if(inp) inp.value='';
-    onSearch('');
+    onMapSearch('');
   }
 
-  // ── Hit test ──
-  function pinAt(mx,my){
-    for(let i=visiblePlaces.length-1;i>=0;i--){
-      const [px,py]=ll2c(visiblePlaces[i].lng,visiblePlaces[i].lat);
-      if(Math.hypot(mx-px,my-(py-14))<19) return i;
-    }
-    return -1;
+  // Init Leaflet after its script loads
+  function loadLeaflet() {
+    if(window.L){ initLeaflet(); return; }
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js';
+    s.onload=initLeaflet;
+    document.head.appendChild(s);
   }
+  window.addEventListener('load', loadLeaflet);
+  setTimeout(loadLeaflet, 500);
 
-  // ── Popup ──
-  function showPopup(idx,cx,cy){
-    const p=visiblePlaces[idx];
-    popIn.innerHTML=`
-      <div class="popup-ph" style="background:${p.c}33">${p.e}</div>
-      <div class="popup-body">
-        <div class="popup-cat">${CAT_LABELS[p.cat]||p.cat}</div>
-        <div class="popup-title">${p.name}</div>
-        <div class="popup-loc">📍 ${p.kec} &nbsp;·&nbsp; ★ ${p.r} (${p.rv.toLocaleString()})</div>
-        <div class="popup-desc">${p.d}</div>
-        <div style="font-size:.68rem;color:#bbb;margin-top:3px">${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div>
-      </div>`;
-    let left=cx+14, top=cy-220;
-    if(left+278>cvs.width) left=cx-288;
-    if(left<4) left=4;
-    if(top<4) top=cy+10;
-    popup.style.left=left+'px';
-    popup.style.top=Math.max(4,top)+'px';
-    popup.classList.add('visible');
-  }
-  function closePopup(){ popup.classList.remove('visible'); }
-
-  // ── Mouse events ──
-  cvs.addEventListener('mousemove',e=>{
-    const r=cvs.getBoundingClientRect();
-    const mx=(e.clientX-r.left)*(cvs.width/r.width);
-    const my=(e.clientY-r.top)*(cvs.height/r.height);
-    if(dragging){camX=csx-(e.clientX-dsx)/TS;camY=csy-(e.clientY-dsy)/TS;render();closePopup();return;}
-    const p=pinAt(mx,my);
-    if(p!==hovered){hovered=p;cvs.style.cursor=p>=0?'pointer':'grab';render();}
-  });
-  cvs.addEventListener('mousedown',e=>{dragging=true;cvs.style.cursor='grabbing';dsx=e.clientX;dsy=e.clientY;csx=camX;csy=camY;});
-  window.addEventListener('mouseup',e=>{
-    if(!dragging)return;
-    const moved=Math.hypot(e.clientX-dsx,e.clientY-dsy);
-    dragging=false; cvs.style.cursor=hovered>=0?'pointer':'grab';
-    if(moved<5){
-      const r=cvs.getBoundingClientRect();
-      const mx=(e.clientX-r.left)*(cvs.width/r.width);
-      const my=(e.clientY-r.top)*(cvs.height/r.height);
-      const p=pinAt(mx,my); p>=0?showPopup(p,mx,my):closePopup();
-    }
-  });
-
-  // ── Wheel zoom (BUG FIX: zoom toward cursor, clamp correctly) ──
-  cvs.addEventListener('wheel',e=>{
-    e.preventDefault();
-    const r=cvs.getBoundingClientRect();
-    const mx=(e.clientX-r.left)*(cvs.width/r.width);
-    const my=(e.clientY-r.top)*(cvs.height/r.height);
-    const [tx,ty]=c2t(mx,my);
-    const delta=e.deltaY<0?1:-1;
-    const nz=Math.max(8,Math.min(16,zoom+delta));
-    if(nz===zoom)return;
-    const s=Math.pow(2,nz-zoom);
-    // Zoom toward cursor position
-    camX=tx*s-(mx-cvs.width/2)/TS;
-    camY=ty*s-(my-cvs.height/2)/TS;
-    zoom=nz;
-    render();closePopup();
-  },{passive:false});
-
-  // ── Touch ──
-  let lp=0;
-  cvs.addEventListener('touchstart',e=>{
-    if(e.touches.length===1){dragging=true;dsx=e.touches[0].clientX;dsy=e.touches[0].clientY;csx=camX;csy=camY;}
-    else if(e.touches.length===2) lp=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-  },{passive:true});
-  cvs.addEventListener('touchmove',e=>{
-    e.preventDefault();
-    if(e.touches.length===1&&dragging){camX=csx-(e.touches[0].clientX-dsx)/TS;camY=csy-(e.touches[0].clientY-dsy)/TS;render();}
-    else if(e.touches.length===2){
-      const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-      if(d>lp*1.12)zoomMap(1);else if(d<lp*0.88)zoomMap(-1);lp=d;
-    }
-  },{passive:false});
-  cvs.addEventListener('touchend',()=>{dragging=false;});
-
-  // ── Controls ──
-  function zoomMap(delta){
-    const nz=Math.max(8,Math.min(16,zoom+delta));
-    if(nz===zoom)return;
-    const s=Math.pow(2,nz-zoom);
-    // Zoom toward center
-    camX=(camX-cvs.width/2/TS)*s+cvs.width/2/TS;
-    camY=(camY-cvs.height/2/TS)*s+cvs.height/2/TS;
-    zoom=nz; render(); closePopup();
-  }
-  function resetMap(){ zoom=10; initCam(); render(); closePopup(); }
-
-  window.addEventListener('resize',()=>{ initCvs(); render(); closePopup(); });
-
-  // ── BULLETPROOF MAP INIT ──
-  function startMap(){
-    initCvs();
-    // Canvas might still be 0 if layout not ready yet
-    if(cvs.width < 10){
-      setTimeout(startMap, 150);
-      return;
-    }
-    initCam();
-    updateVisible(); // calls render() internally
-  }
-
-  // Try multiple init strategies to guarantee map renders
-  // 1. Immediately
-  setTimeout(startMap, 0);
-  // 2. After DOM is painted
-  setTimeout(startMap, 300);
-  // 3. After full page load
-  window.addEventListener('load', () => setTimeout(startMap, 100));
-  // 4. ResizeObserver when wrap gets dimensions
-  if(window.ResizeObserver){
-    const ro = new ResizeObserver(entries => {
-      for(const e of entries){
-        if(e.contentRect.width > 10){
-          ro.disconnect();
-          startMap();
-          break;
-        }
-      }
-    });
-    ro.observe(wrap);
-  }
 </script>
 </body>
 </html>
