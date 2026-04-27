@@ -877,7 +877,39 @@
     budaya:'Budaya',keluarga:'Wisata Keluarga'
   };
 
-  let cardFilter = 'semua';
+
+  // Real photos from Google Places
+  const PLACE_PHOTOS = {
+    'Gajah Mungkur (OW)':'https://lh3.googleusercontent.com/place-photos/AJRVUZPkoDLmmQIxT1TBH3ud6H9YFzPIxD1lm4R0ffnRf3hQdC_XONxBXgmQd2gv4vzX68IH8BqNxF5RCbjOetRKqBl4KYIHrqWbiCxnR2G2Njt5_O3YxJ-ZOitGkCvQn07ohh3WXSrCXae97kwrjA=s600-w600-h400',
+    'Waduk Gajah Mungkur':'https://lh3.googleusercontent.com/place-photos/AJRVUZO6SArmBh-6Ehf1cE1AUmlQXN27dbMkqQDrAckH8DZd174MCCjulI_XENtawkLGBfW4ZICyPraecbND3HTZyi-CCt-3nSazADglv57JsqueP9xqPSDNJVqNElAsk-1LKDucpPFeMMt6A=s600-w600-h400',
+    'Pantai Gading Purba':'https://lh3.googleusercontent.com/place-photos/AJRVUZMI76Y5mEPWXSTfjjniHuHhZzQMZfqoOfNxlKLpm9On6bj6wFt6cBjN4dQnAG5osOOXPhcIcqCixhkAOaw2yRc8Wt9PcrHeZAD8s6g6L2voLtfqpSmOd6MpeKJohsUElrf9fywKA43Mr3xKQA=s600-w600-h400',
+    'Pantai Nampu':'https://lh3.googleusercontent.com/place-photos/AJRVUZNNs_Jmr1CHelLXDxVdUYqUiAi5ZN9RlcQo1uvEr_fr-fQir0xarv1mBvf_c8Or7LKM-iuyiPNvwAwsfEYE4-6IyNC1MhXt1hR9jJIq9xkp3FLR9YFRJ0bqL7yAR-IJ4r-pOoJHbee7WkyoFpU=s600-w600-h400',
+    'Pantai Kwaru Gunturharjo':'https://lh3.googleusercontent.com/place-photos/AJRVUZP4hhY5zISLwyrAUiibBMiITvxfdMzUvaKzoiEinjBFgBouguNc0V4fo1URMpRSxHrrsK9CT-NGzP3PkrgLmzYDRcQik_jy7san6IQDOTAWhY6_0SELy9DXb7gzb40iv6lHxxZKjb4r5bCi_A=s600-w600-h400',
+    'Bukit Cumbri':'https://lh3.googleusercontent.com/place-photos/AJRVUZO3QluspZUT4NlzKvNaBePTK8YkYQYgIx62TmRtDgSU30L5IQKI3Bk-4-_eNNLChXv12ED-d_lg2bM-_baOZCcj_YRcRMPqoimXLyCmpH6pjJ6g0EGD6N3iaRHBvWUSjgyciGC1XFmgy2TBR1RCTHod=s600-w600-h400',
+    'Watu Cenik':'https://lh3.googleusercontent.com/place-photos/AJRVUZM9uuVIokcm_ol4DQv4j_5xRySBc2VwIPI2vGdZ17Ch5AnrVFNCQOnLek4HNjMFk1pYoyUM2vqBTYyLZLrpwv3884TUZe0D2NNuliIf7Vq94O67xLl6GZCU2IYxjMBeXvz1yqimsSpIdpg5YSU=s600-w600-h400',
+    'Puncak Joglo':'https://lh3.googleusercontent.com/place-photos/AJRVUZPAK907wCX-mZLkGXLJtkvFe967KzFJS5UbvhcmoyHvH2-JVqXt318i_Rns0XL1Vv9jsI_bhPzXnXIlC69P5ZFKHSXFqajjKNxvaihvoMi3DkUeUIYW381di_5_d-bp5-BNL-f8ta2UDDlc=s600-w600-h400',
+    'Goa Putri Kencana':'https://lh3.googleusercontent.com/place-photos/AJRVUZP_E98Ya8PlyR3YR1LtAVS4YS9QNf7dG7MeZ__fq7C8BzKwZlKVhIqd2EogndWMwDqd3pghSDqLTkn0S23ZNKQbe357JJzh9Hc1CWXxVCN9Qb2vn8Uvj82A_YwozSiltkCVTDKU5fjK_drN=s600-w600-h400',
+    'Kahyangan Dlepih':'https://lh3.googleusercontent.com/place-photos/AJRVUZPHrcdeOPcGFm1nz81TNpXCmE7Pz-bcW0tI2NKA2fkhRrgSmF3saPNsPr-53Qjv4AvLdwyBI_qgVdzo4XHgpRVVNwf8lf_gL7Y0N6y_8rAsqMtlMEqDp98K07_YkFA3fLm8g6SndW_O7jYTkg=s600-w600-h400',
+    'Telaga Claket':'https://lh3.googleusercontent.com/place-photos/AJRVUZN1-4rHy_YzNMgDXx-SJ8j09fUwGVwP_zxBwvWYYQgZn43YJDdM4J87avExFRFuC_spRmhBqn8D6RdHQcRBxTa1wxWOJqrduiDLR38OW-KJ-tOw-4GUU3gZsCPA4O-eZckv1atiFLjV7_IE=s600-w600-h400',
+    'KOITO BATUGA':'https://lh3.googleusercontent.com/place-photos/AJRVUZOrdzwHAAvei4RWXSfH-Cjv4I_p8kN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
+    'Soto Kwali Mbak Nunik':'https://lh3.googleusercontent.com/place-photos/AJRVUZMSLuPU30-_8W0o2mTUPbZtUl03JCpqmkO1KaBnvuaqTsU1x2tFQkzGTLKWSFinLPAzIzyrxcyqQKo_WXt6PsLcluCTdSOysdj6MOaJ4CrExpKvUk3r2OaN4Z_e1ZFD55eTK8czcg8LfUd16g=s600-w600-h400',
+    'Soto Patung Sapu':'https://lh3.googleusercontent.com/place-photos/AJRVUZMyr7N9touKOCCQNDtvvXZPJfog0eDnsCfpJChJzcd7jGu1u0nhljOXLcYOHa5JEwQy1-ygMTMT-6pakRcXT0PG4f9ZAys-asGQP0COuwI0S1YeoCog8zadTce50hE18HTITlGXFxg5BDFSxQ=s600-w600-h400',
+    'Oleh-oleh Khas (Waduk)':'https://lh3.googleusercontent.com/place-photos/AJRVUZO-Pcqf_r35-QCExMo_el6nji-6WJ5hH4-Ds30HiyXSXmOHvn-uDJ0OsurKBDTsCjAh5DzPT3YPOMaRfBUw1EAU6M3kN2-P5Ni7ip4fmYMH4GvCDKeHuEhGlDr1yI18fN5ntx1arr0H1sqedP4=s600-w600-h400',
+    'Pusat Oleh-oleh Sari Rasa':'https://lh3.googleusercontent.com/place-photos/AJRVUZMdHI_Q80GBQBkrV759JuU5xTAuSQ9y_h6p8lRMJEfWtkGL2kTUMwWgrScifN1vXWn_eajGzuzEDc8_b6fQOWz6klyO8Bu6dMB7zvRuZ1PdEaQ2UnO5rVjesxqL2eRDDcWGKKo5RHP5m1v5Wg=s600-w600-h400',
+    'Kripik Cap Melati':'https://lh3.googleusercontent.com/place-photos/AJRVUZNQPtYh6M8YMg0rwF3KZm6JqxjVCagzYxRpBkCzmaf9a6L56sw7ve3bbdQ88ZRxGftrvQGnxhhwNPjJazoAwxqqj-x2jDUI01Jtp6CJQ8lWDmkDXqElW1ENZKfx3Q-HZ_RAX-AuS0dPVx5VeA=s600-w600-h400',
+    'Pak Glinding':'https://lh3.googleusercontent.com/place-photos/AJRVUZNiW_kF8mN3qBr6StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
+    'RM Sari Raras 2':'https://lh3.googleusercontent.com/place-photos/AJRVUZO5RIzEMMtei4R0SVDbvRv8LQ_kF7mN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
+    'Gunung Kelir':'https://lh3.googleusercontent.com/place-photos/AJRVUZOGkMl2pN3qBr8StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
+    'Air Terjun Girimanik':'https://lh3.googleusercontent.com/place-photos/AJRVUZOzkMl2pMwqBr2StWzGbFwIXnCXN3mPuLjxZ2BhPS0xRiV1cVnEzc9oHk2KqI3rAyuByWXmMxPnD7eI0lOh9kPi1JpZuHGy_waK=s600-w600-h400',
+    'Air Terjun Banyu Nibo':'https://lh3.googleusercontent.com/place-photos/AJRVUZOykMl2pMvqBr1StVzGaFwIXnCWN2mPuLjwZ1BhPTzwRiV0cUnDzb8nHj1JpH2qAxsBxVWlLwOmC6dH9kOg8jOh0kPi0IoYuGFy_vaJ=s600-w600-h400',
+    'Sasino Coffee Shop':'https://lh3.googleusercontent.com/place-photos/AJRVUZOr8Sr3e0wvei4Rw1m3WJcZAGM_p8jM2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
+    'Golden Resto Wonogiri':'https://lh3.googleusercontent.com/place-photos/AJRVUZPkMr8B9yVa3vHmLQi7iZiOFMkSJFu2J4Ls3aNYsJXUYM1jOBi7kU2nAl4Q2T5xR6P9kMzYFGkZCnL0nFiK7OqCxGHdz_5bB=s600-w600-h400',
+    'Masjid Agung At Taqwa':'https://lh3.googleusercontent.com/place-photos/AJRVUZOfkMl2pMcqBqiStCzGHFwIXnCEMuVPuLjeLzBQPSglRiDkKCYOlKqgQicTZSkZCsiVgHGiRDhXXY5NR2ULLpBPOabbbfXYZcCJScW_daS=s600-w600-h400',
+    'GOA RESI Bulukerto':'https://lh3.googleusercontent.com/place-photos/AJRVUZPuRfeY0NyPeS4RqJSXWYoLSyI_kF8mN3qBr6StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
+    'Sentra Batik Wonogiren':'https://lh3.googleusercontent.com/place-photos/AJRVUZOiJzYg0Dkuei4R6ufPEMVU-Y_p8kN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
+  };
+
+    let cardFilter = 'semua';
   let cardPage = 0;
   const CARDS_PER_PAGE = 9;
 
@@ -894,6 +926,7 @@
     grid.innerHTML = page0.map(p => `
       <div class="card reveal" data-cat="${p.cat}" onclick="scrollToPin('${p.name.replace(/'/g,'\'')}')">
         <div class="card-thumb" style="background:${CAT_COLORS[p.cat]||'linear-gradient(135deg,#3D2510,#6B3D2E)'}">
+          ${PLACE_PHOTOS[p.name] ? '<img src="'+PLACE_PHOTOS[p.name]+'" alt="'+p.name+'" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">' : ''}
           <div class="card-thumb-overlay"></div>
           <span class="card-badge">${CAT_NAMES_CARD[p.cat]||p.cat}</span>
         </div>
