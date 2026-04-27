@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nggonku Wonogiri — Portal UMKM & Wisata</title>
+  <meta name="description" content="Temukan UMKM lokal, kuliner khas, dan destinasi wisata Wonogiri yang sesungguhnya." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown-900: #1E0F07;
+      --brown-800: #2C1A0E;
+      --brown-700: #3D2510;
+      --brown-600: #6B3D2E;
+      --brown-400: #9B6B50;
+      --brown-200: #C4A882;
+      --brown-100: #E8D9C0;
+      --brown-50:  #F5EDD8;
+      --gold:      #C8922A;
+      --gold-light:#E8B84B;
+      --teal-dark: #0D4F3C;
+      --teal:      #1A6B5A;
+      --teal-mid:  #2D9E82;
+      --teal-light:#A8D5C8;
+      --red:       #9B2C2C;
+      --cream:     #FAF6EE;
+      --white:     #FFFFFF;
+      --text-dark: #1E0F07;
+      --text-mid:  #5C3D2E;
+      --text-muted:#8B6E5A;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 64px;
+      background: rgba(30,15,7,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,146,42,0.2);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.25rem;
+      color: var(--brown-50); text-decoration: none; letter-spacing: -0.3px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,237,216,0.7); text-decoration: none;
+      font-size: 0.875rem; font-weight: 400; letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta {
+      background: var(--gold); color: var(--brown-900);
+      border: none; padding: 8px 20px; border-radius: 4px;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; position: relative;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 120px 6rem 80px;
+      background: var(--brown-800);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 40%, rgba(26,107,90,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,146,42,0.12) 0%, transparent 50%);
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+      background-size: 28px 28px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 32px; height: 1px; background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 700; line-height: 1.05;
+      color: var(--brown-50); margin-bottom: 1.5rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; font-weight: 600; }
+    .hero-sub {
+      font-size: 1.1rem; font-weight: 300; line-height: 1.75;
+      color: rgba(245,237,216,0.65); max-width: 520px; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: var(--brown-900);
+      padding: 14px 32px; border-radius: 4px; border: none;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-gold:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-ghost {
+      background: transparent; color: var(--brown-100);
+      padding: 14px 32px; border-radius: 4px;
+      border: 1px solid rgba(245,237,216,0.25);
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 400;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(245,237,216,0.5); color: var(--white); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(245,237,216,0.4); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 40px; background: rgba(245,237,216,0.25);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats {
+      background: var(--brown-700); display: flex; justify-content: center;
+      border-bottom: 1px solid rgba(200,146,42,0.15);
+    }
+    .stat { padding: 1.5rem 3rem; text-align: center; border-right: 1px solid rgba(245,237,216,0.08); }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
+    .stat-l { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brown-200); margin-top: 4px; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .sec-tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold);
+      border-bottom: 1.5px solid var(--gold); padding-bottom: 4px; margin-bottom: 1rem;
+    }
+    .sec-title {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .sec-sub { font-size: 1rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; max-width: 540px; }
+
+    /* ── EXPLORE TABS ── */
+    .explore { background: var(--cream); }
+    .tabs-row {
+      display: flex; gap: 0; border-bottom: 1.5px solid rgba(107,61,46,0.12);
+      margin-bottom: 2.5rem; overflow-x: auto; scrollbar-width: none;
+    }
+    .tabs-row::-webkit-scrollbar { display: none; }
+    .tab {
+      padding: 0.75rem 1.5rem; background: none; border: none;
+      font-family: var(--font-body); font-size: 0.875rem; font-weight: 400;
+      color: var(--text-muted); cursor: pointer; white-space: nowrap;
+      position: relative; transition: color 0.2s;
+    }
+    .tab.active { color: var(--brown-700); font-weight: 500; }
+    .tab.active::after {
+      content: ''; position: absolute; bottom: -1.5px; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+    }
+
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
+    }
+    .card {
+      background: var(--white); border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(107,61,46,0.08);
+      transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(107,61,46,0.13); }
+    .card-thumb {
+      height: 176px; position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; padding: 1rem;
+    }
+    .card-thumb img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .card:hover .card-thumb img { transform: scale(1.05); }
+    .card-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(30,15,7,0.6) 0%, transparent 60%);
+    }
+    .card-badge {
+      position: relative; z-index: 1; font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      background: var(--gold); color: var(--brown-900);
+      padding: 3px 10px; border-radius: 3px;
+    }
+    .card-body { padding: 1.25rem 1.25rem 1.5rem; }
+    .card-title { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--text-dark); }
+    .card-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; font-weight: 300; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-loc { font-size: 0.78rem; color: var(--brown-400); display: flex; align-items: center; gap: 5px; }
+    .card-loc svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .card-rating {
+      font-size: 0.82rem; font-weight: 500; color: var(--brown-700);
+      display: flex; align-items: center; gap: 3px;
+    }
+
+      background: var(--gold); color: var(--brown-900); border-color: var(--gold);
+    }
+    .map-zoom-btns {
+      position:absolute; top:12px; right:12px; z-index:40;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .mzb {
+      width:32px; height:32px; border-radius:6px;
+      background:rgba(30,15,7,0.85); color:#F5EDD8; border:1px solid rgba(200,146,42,0.3);
+      font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:background 0.15s;
+    }
+    .mzb:hover { background:rgba(200,146,42,0.9); color:#1E0F07; }
+
+    /* ── ROUTES SECTION ── */
+    .routes { background: #EDE0CC; }
+    .routes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+    .route-card {
+      background: var(--white); border-radius: 10px; padding: 1.75rem;
+      border: 1px solid rgba(107,61,46,0.1);
+      transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .route-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(107,61,46,0.12); }
+    .route-card.featured {
+      background: var(--brown-800); color: var(--brown-50);
+      grid-column: 1 / -1;
+      flex-direction: row; align-items: center; gap: 2rem;
+    }
+    .route-icon {
+      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .route-icon.teal { background: rgba(26,107,90,0.15); }
+    .route-icon.gold { background: rgba(200,146,42,0.15); }
+    .route-icon.red  { background: rgba(155,44,44,0.12); }
+    .route-icon.dark { background: rgba(200,146,42,0.15); }
+    .route-content { flex: 1; }
+    .route-title { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .route-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+    .route-card.featured .route-desc { color: rgba(245,237,216,0.65); }
+    .route-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .rtag {
+      font-size: 0.72rem; padding: 3px 10px; border-radius: 20px;
+      background: rgba(200,146,42,0.12); color: var(--gold);
+    }
+    .route-card.featured .rtag { background: rgba(200,146,42,0.2); }
+    .route-arrow {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(245,237,216,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1rem; flex-shrink: 0;
+    }
+
+    /* ── CTA / DAFTAR ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--teal-dark) 0%, #0A3D2C 100%);
+      padding: 6rem 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 0, transparent 50%);
+      background-size: 24px 24px;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); color: var(--brown-50); margin-bottom: 1rem; }
+    .cta-section p { color: rgba(245,237,216,0.65); font-size: 1rem; font-weight: 300; margin-bottom: 2.5rem; }
+    .cta-form {
+      display: flex; max-width: 500px; margin: 0 auto 1.5rem;
+      background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+    }
+    .cta-form input {
+      flex: 1; background: none; border: none; padding: 14px 18px;
+      font-family: var(--font-body); font-size: 0.9rem; color: var(--white); outline: none;
+    }
+    .cta-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .cta-form button {
+      background: var(--gold); border: none; padding: 0 20px; cursor: pointer;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+      color: var(--brown-900); white-space: nowrap;
+    }
+    .btn-outline-light {
+      background: none; border: 1.5px solid rgba(245,237,216,0.3); color: var(--brown-100);
+      padding: 12px 28px; border-radius: 4px; font-family: var(--font-body);
+      font-size: 0.875rem; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-light:hover { border-color: rgba(245,237,216,0.6); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown-900); color: var(--brown-400);
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-brand .logo {
+      font-family: var(--font-display); font-size: 1.4rem;
+      color: var(--brown-100); margin-bottom: 0.75rem;
+    }
+    .footer-brand .logo span { color: var(--gold); }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.7; font-weight: 300; }
+    .footer-col h4 {
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brown-200); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { color: var(--brown-400); text-decoration: none; font-size: 0.875rem; font-weight: 300; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(245,237,216,0.06);
+      padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+    }
+    .footer-bottom span { color: var(--gold); }
+
+    /* ── MODAL PLACEHOLDER ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 12px; padding: 2.5rem;
+      max-width: 500px; width: 90%; position: relative;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+    .modal h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .modal p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; font-weight: 300; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-mid); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1px solid rgba(107,61,46,0.2);
+      border-radius: 6px; font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--text-dark); background: var(--cream); outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-group textarea { height: 80px; resize: vertical; }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; font-size: 1.4rem; cursor: pointer;
+      color: var(--text-muted); line-height: 1;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { padding: 100px 2rem 60px; }
+      .nav-links { display: none; }
+      .routes-grid { grid-template-columns: 1fr; }
+      .route-card.featured { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats { flex-wrap: wrap; }
+
+    /* ── MAP SECTION ── */
+    .map-section{background:var(--brown-800);padding:5rem 0}
+    .map-section .sec-tag{color:var(--gold-light)}
+    .map-section .sec-title{color:var(--brown-50)}
+    .map-section .sec-sub{color:rgba(245,237,216,0.6)}
+    .map-wrap{margin-top:2rem;border-radius:12px;overflow:hidden;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.45);position:relative;background:#1a2e1a;user-select:none}
+    #wMap{width:100%;height:580px;display:block;cursor:grab;touch-action:none}
+    #wMap:active{cursor:grabbing}
+    .map-filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem}
+    .mf-btn{padding:6px 16px;border-radius:20px;border:1px solid rgba(200,146,42,0.3);background:rgba(200,146,42,0.08);color:var(--brown-100);font-family:var(--font-body);font-size:.78rem;cursor:pointer;transition:background .2s,border-color .2s}
+    .mf-btn.active,.mf-btn:hover{background:var(--gold);color:var(--brown-900);border-color:var(--gold)}
+    .map-zoom-btns{position:absolute;top:12px;right:12px;z-index:40;display:flex;flex-direction:column;gap:4px}
+    .mzb{width:32px;height:32px;border-radius:6px;background:rgba(20,30,20,0.88);color:#F5EDD8;border:1px solid rgba(200,146,42,0.35);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:monospace}
+    .mzb:hover{background:rgba(200,146,42,0.9);color:#1E0F07}
+    .map-popup{position:absolute;z-index:50;width:260px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,146,42,0.3);box-shadow:0 8px 32px rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity .18s}
+    .map-popup.visible{opacity:1;pointer-events:auto}
+    .popup-ph{width:100%;height:90px;display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+    .popup-body{padding:10px 14px 14px}
+    .popup-cat{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C8922A;margin-bottom:3px}
+    .popup-title{font-family:var(--font-display);font-size:.98rem;color:#1E0F07;margin-bottom:3px;line-height:1.25}
+    .popup-loc{font-size:.73rem;color:#8B6E5A;margin-bottom:5px}
+    .popup-desc{font-size:.78rem;color:#5C3D2E;line-height:1.55;margin-bottom:5px;font-weight:300}
+    .popup-close{position:absolute;top:7px;right:9px;background:rgba(0,0,0,0.4);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:13px;line-height:22px;text-align:center;pointer-events:auto}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Nggon<span>ku</span></a>
+  <ul class="nav-links">
+    <li><a href="#jelajah">Jelajah</a></li>
+    <li><a href="#peta">Peta</a></li>
+    <li><a href="#rute">Rute Wisata</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="openModal(); return false;">Daftarkan UMKM</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Kabupaten Wonogiri · Jawa Tengah</div>
+    <h1>Temukan <em>Wonogiri</em><br>yang Sesungguhnya</h1>
+    <p class="hero-sub">
+      Portal komunitas untuk UMKM lokal, kuliner khas, dan destinasi wisata Wonogiri —
+      bukan sekadar peta, tapi cerita nyata dari tanah gaplek.
+    </p>
+    <div class="hero-actions">
+      <a href="#jelajah" class="btn-gold">Mulai Jelajah</a>
+      <a href="#peta" class="btn-ghost">Lihat Peta Lengkap</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Gulir</div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">240+</div><div class="stat-l">UMKM Terdaftar</div></div>
+  <div class="stat"><div class="stat-n">85</div><div class="stat-l">Destinasi Wisata</div></div>
+  <div class="stat"><div class="stat-n">18</div><div class="stat-l">Rute Tematik</div></div>
+  <div class="stat"><div class="stat-n">12</div><div class="stat-l">Kecamatan</div></div>
+</div>
+
+<!-- EXPLORE -->
+<section class="explore" id="jelajah">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Jelajah</div>
+      <h2 class="sec-title">Temukan Tempat & Produk Lokal</h2>
+      <p class="sec-sub">Dari warung legendaris hingga pantai tersembunyi — semua ada di Wonogiri.</p>
+    </div>
+
+    <div class="tabs-row" style="margin-top:2rem;">
+      <button class="tab active" onclick="filterCards('semua',this)">Semua</button>
+      <button class="tab" onclick="filterCards('wisata',this)">Wisata Alam</button>
+      <button class="tab" onclick="filterCards('kuliner',this)">Kuliner</button>
+      <button class="tab" onclick="filterCards('kerajinan',this)">Kerajinan</button>
+      <button class="tab" onclick="filterCards('oleholeh',this)">Oleh-oleh</button>
+      <button class="tab" onclick="filterCards('budaya',this)">Budaya & Sejarah</button>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- Waduk Gajah Mungkur -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#1A6B5A,#2D9E82)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPkoDLmmQIxT1TBH3ud6H9YFzPIxD1lm4R0ffnRf3hQdC_XONxBXgmQd2gv4vzX68IH8BqNxF5RCbjOetRKqBl4KYIHrqWbiCxnR2G2Njt5_O3YxJ-ZOitGkCvQn07ohh3WXSrCXae97kwrjA=s800-w800-h600" alt="Waduk Gajah Mungkur" onerror="this.style.display='none'" />
+          <span class="card-badge">Wisata Alam</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Waduk Gajah Mungkur</div>
+          <div class="card-desc">Ikon Wonogiri — waduk terbesar di Jawa Tengah. Perahu, jembatan kaca, paralayang, waterboom, dan sunset memukau.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Wonogiri
+            </span>
+            <span class="card-rating">★ 4.4 &nbsp;<small style="font-weight:300;color:#aaa">(873)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantai Nampu -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#0D4F3C,#1A6B5A)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNNs_Jmr1CHelLXDxVdUYqUiAi5ZN9RlcQo1uvEr_fr-fQir0xarv1mBvf_c8Or7LKM-iuyiPNvwAwsfEYE4-6IyNC1MhXt1hR9jJIq9xkp3FLR9YFRJ0bqL7yAR-IJ4r-pOoJHbee7WkyoFpU=s800-w800-h600" alt="Pantai Nampu" onerror="this.style.display='none'" />
+          <span class="card-badge">Hidden Gem</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Pantai Nampu</div>
+          <div class="card-desc">Pantai pasir putih tersembunyi di selatan Wonogiri — sepi, alami, gratis, dan terasa seperti pantai pribadi.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Paranggupito
+            </span>
+            <span class="card-rating">★ 4.5 &nbsp;<small style="font-weight:300;color:#aaa">(4.2K)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bukit Cumbri -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#2C5F2E,#4A8C3F)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZO3QluspZUT4NlzKvNaBePTK8YkYQYgIx62TmRtDgSU30L5IQKI3Bk-4-_eNNLChXv12ED-d_lg2bM-_baOZCcj_YRcRMPqoimXLyCmpH6pjJ6g0EGD6N3iaRHBvWUSjgyciGC1XFmgy2TBR1RCTHod=s800-w800-h600" alt="Bukit Cumbri" onerror="this.style.display='none'" />
+          <span class="card-badge">Petualangan</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Bukit Cumbri</div>
+          <div class="card-desc">Trekking 45–60 menit dengan pemandangan sunrise/sunset spektakuler. Ada monyet liar di sepanjang jalur!</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Purwantoro
+            </span>
+            <span class="card-rating">★ 4.6 &nbsp;<small style="font-weight:300;color:#aaa">(1.9K)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kahyangan Dlepih -->
+      <div class="card" data-cat="budaya">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#3D2510,#6B3D2E)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPHrcdeOPcGFm1nz81TNpXCmE7Pz-bcW0tI2NKA2fkhRrgSmF3saPNsPr-53Qjv4AvLdwyBI_qgVdzo4XHgpRVVNwf8lf_gL7Y0N6y_8rAsqMtlMEqDp98K07_YkFA3fLm8g6SndW_O7jYTkg=s800-w800-h600" alt="Kahyangan Dlepih" onerror="this.style.display='none'" />
+          <span class="card-badge">Budaya</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Kahyangan Dlepih</div>
+          <div class="card-desc">Situs spiritual bersejarah — tempat bertapa Panembahan Senopati. Suasana damai, sungai jernih, air terjun mini.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Tirtomoyo
+            </span>
+            <span class="card-rating">★ 4.7 &nbsp;<small style="font-weight:300;color:#aaa">(279)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soto Kwali Mbak Nunik -->
+      <div class="card" data-cat="kuliner">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#6B3D2E,#C8922A)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZMyr7N9touKOCCQNDtvvXZPJfog0eDnsCfpJChJzcd7jGu1u0nhljOXLcYOHa5JEwQy1-ygMTMT-6pakRcXT0PG4f9ZAys-asGQP0COuwI0S1YeoCog8zadTce50hE18HTITlGXFxg5BDFSxQ=s800-w800-h600" alt="Soto Patung Sapu" onerror="this.style.display='none'" />
+          <span class="card-badge">Kuliner</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Soto Kwali Mbak Nunik</div>
+          <div class="card-desc">Soto kwali segar mulai Rp 7.000 — pilihan ayam, sapi, babat, dan timlo. Buka sore sampai tengah malam depan Pasar Wonogiri.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Wonogiri Kota
+            </span>
+            <span class="card-rating">★ 4.6 &nbsp;<small style="font-weight:300;color:#aaa">(17)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oleh-oleh Khas Wonogiri -->
+      <div class="card" data-cat="oleholeh">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#9B2C2C,#C86A2A)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZO-Pcqf_r35-QCExMo_el6nji-6WJ5hH4-Ds30HiyXSXmOHvn-uDJ0OsurKBDTsCjAh5DzPT3YPOMaRfBUw1EAU6M3kN2-P5Ni7ip4fmYMH4GvCDKeHuEhGlDr1yI18fN5ntx1arr0H1sqedP4=s800-w800-h600" alt="Oleh-oleh Wonogiri" onerror="this.style.display='none'" />
+          <span class="card-badge">Oleh-oleh</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Oleh-oleh Khas Wonogiri</div>
+          <div class="card-desc">Tiwul, gatot, kripik singkong, dan mete — toko oleh-oleh terlengkap dekat pintu masuk Waduk Gajah Mungkur.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Wonogiri
+            </span>
+            <span class="card-rating">★ 4.7 &nbsp;<small style="font-weight:300;color:#aaa">(81)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kerajinan Bambu -->
+      <div class="card" data-cat="kerajinan">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#2C5F2E,#6B8C3A)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZM36kBIiUvd3gVRHcdgwXAFI1FPBkkF8KV1ES94L8siJmW9PWQcDliX9vvYe_i9oD7CzaS59Yox9qTErc_4ATUicUtRUF0SnbWbL4zuwbKrZ6JHSrmOxfCwd3QnwizOyt4NE-cYQPEPVk6GmQ=s800-w800-h600" alt="Kerajinan Bambu" onerror="this.style.display='none'" />
+          <span class="card-badge">Kerajinan</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Kerajinan Bambu Manyaran</div>
+          <div class="card-desc">Sentra industri bambu Karya Deling Indah — produk unik hasil tangan pengrajin lokal Kecamatan Manyaran.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Manyaran
+            </span>
+            <span class="card-rating">★ 4.7 &nbsp;<small style="font-weight:300;color:#aaa">(3)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantai Gading Purba -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#1A6B5A,#0D4F3C)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZMI76Y5mEPWXSTfjjniHuHhZzQMZfqoOfNxlKLpm9On6bj6wFt6cBjN4dQnAG5osOOXPhcIcqCixhkAOaw2yRc8Wt9PcrHeZAD8s6g6L2voLtfqpSmOd6MpeKJohsUElrf9fywKA43Mr3xKQA=s800-w800-h600" alt="Pantai Gading Purba" onerror="this.style.display='none'" />
+          <span class="card-badge">Wisata</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Pantai Gading Purba</div>
+          <div class="card-desc">Spot tepi Waduk Gajah Mungkur dengan view memukau dan resto ikan bakar. Romantis untuk makan siang atau sore.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Wonogiri
+            </span>
+            <span class="card-rating">★ 4.6 &nbsp;<small style="font-weight:300;color:#aaa">(1.9K)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kripik Cap Melati -->
+      <div class="card" data-cat="oleholeh">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#C86A2A,#9B4A1A)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNQPtYh6M8YMg0rwF3KZm6JqxjVCagzYxRpBkCzmaf9a6L56sw7ve3bbdQ88ZRxGftrvQGnxhhwNPjJazoAwxqqj-x2jDUI01Jtp6CJQ8lWDmkDXqElW1ENZKfx3Q-HZ_RAX-AuS0dPVx5VeA=s800-w800-h600" alt="Kripik Cap Melati" onerror="this.style.display='none'" />
+          <span class="card-badge">UMKM Lokal</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Kripik Cap Melati Ngadirojo</div>
+          <div class="card-desc">Kripik pisang dan singkong press Bu Sukirah — variatif, renyah, recommended banget. Produksi rumahan sejak puluhan tahun.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Ngadirojo
+            </span>
+            <span class="card-rating">★ 4.8 &nbsp;<small style="font-weight:300;color:#aaa">(16)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goa Putri Kencana -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#2C3D6B,#4A5C9B)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZP_E98Ya8PlyR3YR1LtAVS4YS9QNf7dG7MeZ__fq7C8BzKwZlKVhIqd2EogndWMwDqd3pghSDqLTkn0S23ZNKQbe357JJzh9Hc1CWXxVCN9Qb2vn8Uvj82A_YwozSiltkCVTDKU5fjK_drN=s800-w800-h600" alt="Goa Putri Kencana" onerror="this.style.display='none'" />
+          <span class="card-badge">Geopark</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Goa Putri Kencana</div>
+          <div class="card-desc">Gua karst di kawasan Geopark Sewu — stalaktit dan stalagmit alami yang menakjubkan. Bagian dari warisan geologi dunia.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Pracimantoro
+            </span>
+            <span class="card-rating">★ 4.2 &nbsp;<small style="font-weight:300;color:#aaa">(142)</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Telaga Claket -->
+      <div class="card" data-cat="wisata">
+        <div class="card-thumb" style="background:linear-gradient(160deg,#1A6B5A,#3D9B78)">
+          <div class="card-thumb-overlay"></div>
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZN1-4rHy_YzNMgDXx-SJ8j09fUwGVwP_zxBwvWYYQgZn43YJDdM4J87avExFRFuC_spRmhBqn8D6RdHQcRBxTa1wxWOJqrduiDLR38OW-KJ-tOw-4GUU3gZsCPA4O-eZckv1atiFLjV7_IE=s800-w800-h600" alt="Telaga Claket" onerror="this.style.display='none'" />
+          <span class="card-badge">Alam</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Telaga Claket</div>
+          <div class="card-desc">Telaga kecil nan cantik di Selogiri — tiket Rp 10.000 sudah include minuman. Cocok untuk foto prewedding dan piknik keluarga.</div>
+          <div class="card-footer">
+            <span class="card-loc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              Kec. Selogiri
+            </span>
+            <span class="card-rating">★ 4.1 &nbsp;<small style="font-weight:300;color:#aaa">(1.6K)</small></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /cards-grid -->
+  </div>
+</section>
+
+
+<!-- MAP SECTION -->
+<section class="map-section" id="peta">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Peta Interaktif</div>
+      <h2 class="sec-title">Peta Wonogiri — 19 Titik Wisata & UMKM</h2>
+      <p class="sec-sub">Klik pin untuk info lengkap. Scroll untuk zoom, drag untuk geser.</p>
+    </div>
+    <div class="map-filter-bar reveal">
+      <button class="mf-btn active" onclick="filterMap('semua',this)">Semua (19)</button>
+      <button class="mf-btn" onclick="filterMap('wisata',this)">🏞 Wisata Alam</button>
+      <button class="mf-btn" onclick="filterMap('kuliner',this)">🍜 Kuliner</button>
+      <button class="mf-btn" onclick="filterMap('oleholeh',this)">🛍 Oleh-oleh</button>
+      <button class="mf-btn" onclick="filterMap('kerajinan',this)">🎨 Kerajinan</button>
+      <button class="mf-btn" onclick="filterMap('budaya',this)">🏛 Budaya</button>
+    </div>
+    <div class="map-wrap reveal">
+      <canvas id="wMap"></canvas>
+      <div class="map-zoom-btns">
+        <button class="mzb" onclick="zoomMap(1)" title="Zoom In">+</button>
+        <button class="mzb" onclick="zoomMap(-1)" title="Zoom Out">−</button>
+        <button class="mzb" onclick="resetMap()" title="Reset" style="font-size:11px">⌂</button>
+      </div>
+      <div class="map-popup" id="mapPopup">
+        <button class="popup-close" onclick="closePopup()">×</button>
+        <div id="popupInner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTES -->
+<section class="routes" id="rute">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Rute Tematik</div>
+      <h2 class="sec-title">Jelajah Lebih Dalam dengan Panduan Lokal</h2>
+      <p class="sec-sub">Itinerary dikurasi tim lokal — bukan copy-paste dari internet.</p>
+    </div>
+    <div class="routes-grid">
+
+      <div class="route-card featured reveal">
+        <div class="route-icon dark">🌊</div>
+        <div class="route-content">
+          <div class="route-title">Seharian di Gajah Mungkur</div>
+          <div class="route-desc">Sarapan soto di pasar pagi, naik perahu ke tengah waduk, makan ikan bakar di Pantai Gading Purba, sore di Watu Cenik untuk sunset, dan malam di angkringan kota.</div>
+          <div class="route-tags">
+            <span class="rtag">8 jam</span>
+            <span class="rtag">Keluarga</span>
+            <span class="rtag">~Rp 150rb/orang</span>
+            <span class="rtag">7 titik</span>
+          </div>
+        </div>
+        <div class="route-arrow">→</div>
+      </div>
+
+      <div class="route-card reveal">
+        <div class="route-icon gold">🍜</div>
+        <div class="route-content">
+          <div class="route-title">Kuliner Malam Wonogiri</div>
+          <div class="route-desc">Angkringan legendaris, soto kwali mbak Nunik, wedang jahe, dan nasi goreng pincuk sampai dini hari.</div>
+          <div class="route-tags">
+            <span class="rtag">3–4 jam</span>
+            <span class="rtag">Malam</span>
+            <span class="rtag">5 titik</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="route-card reveal">
+        <div class="route-icon teal">🧗</div>
+        <div class="route-content">
+          <div class="route-title">Petualangan Wonogiri Selatan</div>
+          <div class="route-desc">Geopark Sewu, Goa Putri Kencana, Pantai Nampu, Pantai Kwaru — untuk jiwa petualang sejati. Butuh 2 hari.</div>
+          <div class="route-tags">
+            <span class="rtag">2 hari</span>
+            <span class="rtag">Petualangan</span>
+            <span class="rtag">9 titik</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="route-card reveal">
+        <div class="route-icon red">🏛️</div>
+        <div class="route-content">
+          <div class="route-title">Jejak Spiritual Wonogiri</div>
+          <div class="route-desc">Kahyangan Dlepih, situs-situs keramat Panembahan Senopati, dan cerita sejarah yang tersembunyi di balik batu.</div>
+          <div class="route-tags">
+            <span class="rtag">Sehari</span>
+            <span class="rtag">Budaya</span>
+            <span class="rtag">4 titik</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA / DAFTARKAN UMKM -->
+<section class="cta-section" id="tentang">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag" style="color:var(--teal-light);border-color:var(--teal-light)">Bergabung</div>
+      <h2>Kamu Punya UMKM di Wonogiri?</h2>
+      <p>Daftarkan usahamu secara gratis dan raih lebih banyak pengunjung dari seluruh Indonesia.</p>
+      <div class="cta-form">
+        <input type="text" placeholder="Cari tempat, kuliner, atau produk UMKM..." id="searchInput" onkeydown="if(event.key==='Enter')doSearch()" />
+        <button onclick="doSearch()">Cari</button>
+      </div>
+      <button class="btn-outline-light" onclick="openModal()">Daftarkan UMKM Gratis →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Nggon<span>ku</span> Wonogiri</div>
+        <p>Platform komunitas independen untuk mendukung UMKM lokal dan wisata Wonogiri. Dibuat dengan cinta untuk warga dan wisatawan Wonogiri.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Jelajah</h4>
+        <ul>
+          <li><a href="#jelajah">Wisata Alam</a></li>
+          <li><a href="#jelajah">Kuliner</a></li>
+          <li><a href="#jelajah">Kerajinan</a></li>
+          <li><a href="#jelajah">Oleh-oleh</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#rute">Rute Tematik</a></li>
+          <li><a href="#peta">Peta Interaktif</a></li>
+          <li><a href="#" onclick="openModal();return false">Daftar UMKM</a></li>
+          <li><a href="#">Blog Lokal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#">Kontak</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">API Docs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 <span>Nggonku Wonogiri</span></span>
+      <span style="font-size:0.78rem;color:var(--brown-400)">Platform komunitas · Bukan afiliasi Google Maps</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL DAFTARKAN UMKM -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Daftarkan UMKM Anda</h3>
+    <p>Isi form berikut dan tim kami akan menghubungi Anda dalam 1×24 jam.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nama Usaha *</label>
+        <input type="text" placeholder="cth. Warung Bu Sari" />
+      </div>
+      <div class="form-group">
+        <label>Kategori *</label>
+        <select>
+          <option>Kuliner</option>
+          <option>Kerajinan</option>
+          <option>Oleh-oleh</option>
+          <option>Wisata</option>
+          <option>Jasa</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Alamat / Kecamatan *</label>
+      <input type="text" placeholder="cth. Jl. Raya No.1, Kec. Wonogiri" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>No. HP / WhatsApp *</label>
+        <input type="tel" placeholder="08xx-xxxx-xxxx" />
+      </div>
+      <div class="form-group">
+        <label>Instagram (opsional)</label>
+        <input type="text" placeholder="@namaakun" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Deskripsi Singkat Usaha</label>
+      <textarea placeholder="Ceritakan keunikan usaha Anda..."></textarea>
+    </div>
+    <button class="btn-gold" style="width:100%;justify-content:center;padding:14px" onclick="submitForm()">Kirim Pendaftaran →</button>
+  </div>
+</div>
+<!-- SCRIPTS -->
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+  document.querySelector('.hero-content').classList.add('visible');
+
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background =
+      window.scrollY > 60 ? 'rgba(30,15,7,0.97)' : 'rgba(30,15,7,0.92)';
+  });
+
+  // ── TAB FILTER ──
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#cardsGrid .card').forEach(c => {
+      c.style.display = (cat === 'semua' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // ── SEARCH ──
+  function doSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) alert('Pencarian "' + q + '" akan aktif setelah integrasi backend.');
+  }
+
+  // ── MODAL ──
+  function openModal()  { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function submitForm() { alert('Pendaftaran dikirim! Tim kami akan segera menghubungi Anda.'); closeModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+
+  // ══════════════════════════════════════════════════════════
+  // MAP ENGINE — OSM tiles with offline SVG vector fallback
+  // ══════════════════════════════════════════════════════════
+
+  const PLACES = [
+    {name:'Waduk Gajah Mungkur (OW)',     cat:'wisata',    kec:'Kec. Wonogiri',     lat:-7.85551,   lng:110.910316,  r:'4.2★',  e:'🌊', c:'#1A9E7A', d:'Ikon Wonogiri — perahu, jembatan kaca, paralayang, waterboom. Tiket Rp 15.000. Buka 08–17.'},
+    {name:'Waduk Gajah Mungkur (Danau)',  cat:'wisata',    kec:'Kec. Wonogiri',     lat:-7.8975518, lng:110.8970163, r:'4.4★',  e:'💧', c:'#0D7F5C', d:'Bendungan Bengawan Solo 8.800 ha. Diresmikan Presiden Soeharto 17 Nov 1981.'},
+    {name:'Pantai Gading Purba',          cat:'wisata',    kec:'Kec. Wonogiri',     lat:-7.850997,  lng:110.916772,  r:'4.6★',  e:'🏖', c:'#1DB88A', d:'Spot tepi waduk dengan view memukau. Resto ikan bakar & sewa perahu. Buka 08–18.'},
+    {name:'Watu Cenik',                   cat:'wisata',    kec:'Kec. Wonogiri',     lat:-7.8498856, lng:110.9129708, r:'4.6★',  e:'🪨', c:'#2DB890', d:'Bukit pandang terbaik — view 180° Waduk Gajah Mungkur dari ketinggian.'},
+    {name:'Puncak Joglo',                 cat:'wisata',    kec:'Kec. Wonogiri',     lat:-7.8450954, lng:110.8964701, r:'4.5★',  e:'⛰', c:'#1A9E7A', d:'View 360° Waduk Gajah Mungkur dari puncak bukit. Terbaik saat sunrise.'},
+    {name:'Telaga Claket',                cat:'wisata',    kec:'Kec. Selogiri',     lat:-7.7581614, lng:110.9079929, r:'4.1★',  e:'🌿', c:'#2DB880', d:'Telaga kecil cantik — tiket Rp 10.000 include minuman. Cocok untuk piknik.'},
+    {name:'Bukit Cumbri',                 cat:'wisata',    kec:'Kec. Purwantoro',   lat:-7.840745,  lng:111.305882,  r:'4.6★',  e:'🥾', c:'#3B8D11', d:'Trekking 45–60 menit, sunrise/sunset spektakuler, ada monyet liar di jalur.'},
+    {name:'Kahyangan Dlepih',             cat:'budaya',    kec:'Kec. Tirtomoyo',    lat:-7.9729649, lng:111.0755517, r:'4.7★',  e:'🏛', c:'#8B5A3C', d:'Situs spiritual — tempat bertapa Panembahan Senopati. Suasana damai.'},
+    {name:'Goa Putri Kencana',            cat:'wisata',    kec:'Kec. Pracimantoro', lat:-8.0194815, lng:110.7931649, r:'4.2★',  e:'🦇', c:'#3C5D8B', d:'Gua karst Geopark Sewu — stalaktit & stalagmit alami. Buka 08–15.30.'},
+    {name:'Hutan Pinus Gumiwang',         cat:'wisata',    kec:'Kec. Wuryantoro',   lat:-7.8611968, lng:110.8766443, r:'4.2★',  e:'🌲', c:'#2C7F2E', d:'Hutan pinus dekat Waduk — udara sejuk, cocok untuk healing & jogging pagi.'},
+    {name:'Pantai Nampu',                 cat:'wisata',    kec:'Kec. Paranggupito', lat:-8.2101472, lng:110.9027687, r:'4.5★',  e:'🏄', c:'#1A8B6A', d:'Pantai pasir putih tersembunyi — sepi, alami, gratis. Ombak bagus untuk surfing.'},
+    {name:'Pantai Kwaru',                 cat:'wisata',    kec:'Kec. Paranggupito', lat:-8.2111416, lng:110.8970096, r:'4.6★',  e:'🌴', c:'#0D6F5C', d:'Pantai alami tersembunyi di sebelah Pantai Nampu — terasa seperti pantai pribadi.'},
+    {name:'Soto Kwali Mbak Nunik',        cat:'kuliner',   kec:'Wonogiri Kota',     lat:-7.816550,  lng:110.9230827, r:'4.6★',  e:'🍜', c:'#C8922A', d:'Soto kwali segar mulai Rp 7.000. Pilihan ayam, sapi, babat, timlo. Buka 17–24.'},
+    {name:'Soto Patung Sapu',             cat:'kuliner',   kec:'Wonogiri Kota',     lat:-7.814611,  lng:110.9221859, r:'4.4★',  e:'🥣', c:'#A07840', d:'Soto khas Wonogiri buka sampai 03.00 pagi. Gorengan dan sunduk beragam.'},
+    {name:'Oleh-oleh Khas Wonogiri',      cat:'oleholeh',  kec:'Kec. Wonogiri',     lat:-7.859404,  lng:110.9033732, r:'4.7★',  e:'🛍', c:'#C83C3C', d:'Tiwul, gatot, kripik singkong, mete — dekat pintu masuk Waduk. Buka 07–20.'},
+    {name:'Pusat Oleh-oleh Sari Rasa',    cat:'oleholeh',  kec:'Kec. Wonogiri',     lat:-7.8142894, lng:110.9237093, r:'4.3★',  e:'🥜', c:'#C86A2A', d:'Toko legendaris — mete, wijen, cabuk, emping, intip khas Wonogiri. Buka 06–21.'},
+    {name:'Rengginang Bu Sukatmi',        cat:'oleholeh',  kec:'Kec. Wonogiri',     lat:-7.7839169, lng:110.9527912, r:'4.5★',  e:'🍘', c:'#A07850', d:'Rengginang singkong renyah produksi rumahan. Mekar sempurna saat digoreng.'},
+    {name:'Kerajinan Bambu Manyaran',     cat:'kerajinan', kec:'Kec. Manyaran',     lat:-7.8194057, lng:110.8142623, r:'4.7★',  e:'🎋', c:'#3B7D11', d:'Sentra industri kerajinan bambu — produk unik hasil tangan pengrajin lokal.'},
+    {name:'Kripik Cap Melati Ngadirojo',  cat:'oleholeh',  kec:'Kec. Ngadirojo',    lat:-7.7989575, lng:111.0131114, r:'4.8★',  e:'🍟', c:'#C8922A', d:'Kripik pisang & singkong press Bu Sukirah — variatif, renyah. Buka 08–16.30.'}
+  ];
+
+  // ── Slippy tile math ──
+  const π = Math.PI;
+  function lng2t(lng, z) { return (lng+180)/360 * (1<<z); }
+  function lat2t(lat, z) { const φ=lat*π/180; return (1 - Math.log(Math.tan(φ)+1/Math.cos(φ))/π)/2 * (1<<z); }
+  function t2lat(y, z)   { const n=π-2*π*y/(1<<z); return 180/π*Math.atan(.5*(Math.exp(n)-Math.exp(-n))); }
+  function t2lng(x, z)   { return x/(1<<z)*360-180; }
+
+  // ── State ──
+  const cvs = document.getElementById('wMap');
+  const ctx = cvs.getContext('2d');
+  const popup = document.getElementById('mapPopup');
+  const popInner = document.getElementById('popupInner');
+  const wrap = cvs.parentElement;
+
+  const TS = 256; // tile size
+  let zoom = 10;
+  let camX = lng2t(110.965, zoom);
+  let camY = lat2t(-7.97, zoom);
+  let dragging=false, dsx=0, dsy=0, csx=0, csy=0;
+  let hovered=-1, activeFilter='semua';
+  const cache = {};
+
+  // ── Canvas size ──
+  function initSize() {
+    cvs.width  = Math.max(300, wrap.clientWidth);
+    cvs.height = 580;
+  }
+
+  // ── Coord transforms ──
+  function t2c(tx, ty) {
+    return [(tx-camX)*TS + cvs.width/2, (ty-camY)*TS + cvs.height/2];
+  }
+  function c2t(cx, cy) {
+    return [(cx-cvs.width/2)/TS+camX, (cy-cvs.height/2)/TS+camY];
+  }
+  function ll2c(lng, lat) { return t2c(lng2t(lng,zoom), lat2t(lat,zoom)); }
+
+  // ── Tile loading — tries multiple CDNs ──
+  function loadTile(x, y, z) {
+    const key = z+'/'+x+'/'+y;
+    if (cache[key]) return cache[key];
+    cache[key] = 'loading';
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    // Try OSM servers a/b/c
+    const sub = ['a','b','c'][(x+y+z)%3];
+    img.src = `https://${sub}.tile.openstreetmap.org/${z}/${x}/${y}.png`;
+    img.onload = () => { cache[key]=img; render(); };
+    img.onerror = () => {
+      // Fallback: try tile.opentopomap.org
+      const img2 = new Image(); img2.crossOrigin='anonymous';
+      img2.src = `https://tile.opentopomap.org/${z}/${x}/${y}.png`;
+      img2.onload = () => { cache[key]=img2; render(); };
+      img2.onerror = () => { cache[key]='err'; render(); };
+    };
+    return null;
+  }
+
+  // ── Vector fallback map for Wonogiri (when tiles blocked) ──
+  function drawVectorMap() {
+    const W = cvs.width, H = cvs.height;
+
+    // Background — terrain color
+    ctx.fillStyle = '#3d5c3a';
+    ctx.fillRect(0,0,W,H);
+
+    // Helper
+    function ll(lng,lat){ return ll2c(lng,lat); }
+    function poly(pts, fill, stroke, sw=1) {
+      if(pts.length<2) return;
+      ctx.beginPath();
+      pts.forEach(([g,l],i)=>{ const [x,y]=ll(g,l); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+      ctx.closePath();
+      if(fill){ctx.fillStyle=fill;ctx.fill();}
+      if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke();}
+    }
+    function line(pts, stroke, sw=1, dash=[]) {
+      if(pts.length<2) return;
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      pts.forEach(([g,l],i)=>{ const [x,y]=ll(g,l); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+      ctx.strokeStyle=stroke; ctx.lineWidth=sw; ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    function label(text, lng, lat, size=10, color='rgba(255,255,255,0.7)', bold=false) {
+      const [x,y]=ll(lng,lat);
+      if(x<-50||x>W+50||y<-50||y>H+50) return;
+      ctx.font=(bold?'600 ':'')+ size+'px DM Sans,sans-serif';
+      ctx.fillStyle=color; ctx.textAlign='center'; ctx.textBaseline='middle';
+      // shadow
+      ctx.shadowColor='rgba(0,0,0,0.7)'; ctx.shadowBlur=3;
+      ctx.fillText(text,x,y);
+      ctx.shadowBlur=0;
+    }
+
+    // ── Terrain zones (kecamatan approximate polygons) ──
+    // Northern hills (lighter green)
+    poly([[110.75,-7.70],[111.35,-7.70],[111.35,-7.80],[110.75,-7.80]], '#4a7045', null);
+    // Southern arid zone (more ochre)
+    poly([[110.75,-8.10],[111.35,-8.10],[111.35,-8.28],[110.75,-8.28]], '#5c6b3a', null);
+    // Coast
+    poly([[110.75,-8.19],[111.35,-8.19],[111.35,-8.28],[110.75,-8.28]], '#2a4a5c', null);
+
+    // ── Waduk Gajah Mungkur (water body) ──
+    poly([
+      [110.858,-7.838],[110.878,-7.832],[110.898,-7.834],[110.920,-7.838],
+      [110.932,-7.848],[110.937,-7.862],[110.935,-7.878],[110.928,-7.896],
+      [110.916,-7.912],[110.904,-7.924],[110.890,-7.932],[110.875,-7.932],
+      [110.860,-7.924],[110.848,-7.908],[110.842,-7.888],[110.843,-7.868],
+      [110.850,-7.852],[110.858,-7.838]
+    ], '#2a6ea0', '#5ab8e8', 1.5);
+    label('Waduk Gajah Mungkur', 110.892, -7.883, zoom>=11?12:10, 'rgba(120,210,245,0.85)', true);
+
+    // ── Bengawan Solo river ──
+    line([[110.75,-7.79],[110.82,-7.795],[110.86,-7.80],[110.87,-7.82],
+          [110.872,-7.835],[110.875,-7.832]], '#4a9ec8', 2.5);
+    line([[110.876,-7.932],[110.88,-7.96],[110.895,-7.98],
+          [110.91,-8.00],[110.93,-8.02],[110.97,-8.04],[111.05,-8.05]], '#4a9ec8', 2.5);
+
+    // ── Sungai Keduang ──
+    line([[111.05,-7.72],[111.02,-7.75],[110.98,-7.78],[110.95,-7.82],
+          [110.935,-7.848]], '#4a9ec8', 1.8);
+
+    // ── Sungai Tirtomoyo ──
+    line([[111.08,-7.92],[111.07,-7.95],[111.065,-7.97],
+          [111.06,-8.00],[111.04,-8.03]], '#4a9ec8', 1.5);
+
+    // ── Jalan Nasional (Wonogiri–Solo) ──
+    line([[110.75,-7.82],[110.80,-7.815],[110.85,-7.812],
+          [110.90,-7.813],[110.93,-7.812],[110.96,-7.810],[111.00,-7.808]], '#e8c86a', 2.5);
+    // Wonogiri–Pracimantoro
+    line([[110.912,-7.82],[110.90,-7.86],[110.892,-7.93],
+          [110.88,-7.98],[110.86,-8.02],[110.83,-8.07],[110.80,-8.10]], '#e8c86a', 2.2);
+    // Wonogiri–Baturetno–Pacitan
+    line([[110.912,-7.82],[110.95,-7.83],[110.98,-7.85],[111.02,-7.87],
+          [111.05,-7.90],[111.08,-7.93],[111.10,-7.96],[111.12,-8.00]], '#e8c86a', 2.2);
+    // Wonogiri Kota–Ngadirojo
+    line([[110.912,-7.82],[110.935,-7.82],[110.96,-7.815],[110.99,-7.81],
+          [111.01,-7.81],[111.03,-7.808]], '#f0d080', 1.8);
+
+    // ── Jalan Provinsi ──
+    line([[110.90,-7.75],[110.91,-7.77],[110.912,-7.82]], '#d4b84a', 1.5);
+    line([[110.82,-7.82],[110.82,-7.86],[110.82,-7.90]], '#d4b84a', 1.5);
+    line([[111.00,-7.808],[111.03,-7.82],[111.06,-7.84],[111.07,-7.87]], '#d4b84a', 1.5);
+
+    // ── Jalan lokal utama ──
+    const localRoads = [
+      [[110.85,-7.84],[110.862,-7.858],[110.865,-7.878]],
+      [[110.88,-7.96],[110.90,-7.97],[110.912,-7.97]],
+      [[110.76,-7.82],[110.78,-7.84],[110.79,-7.87],[110.80,-7.90]],
+      [[110.96,-7.82],[110.97,-7.84],[110.97,-7.87]],
+    ];
+    localRoads.forEach(r => line(r, 'rgba(220,200,130,0.5)', 1));
+
+    // ── Kota / Kecamatan labels ──
+    const towns = [
+      {name:'WONOGIRI', lng:110.912, lat:-7.812, size:zoom>=11?13:11, bold:true, color:'rgba(255,255,220,0.95)'},
+      {name:'Selogiri',  lng:110.908, lat:-7.760, size:9},
+      {name:'Ngadirojo', lng:111.010, lat:-7.805, size:9},
+      {name:'Baturetno', lng:111.10,  lat:-7.960, size:9},
+      {name:'Tirtomoyo', lng:111.068, lat:-7.958, size:9},
+      {name:'Eromoko',   lng:110.78,  lat:-7.962, size:9},
+      {name:'Pracimantoro',lng:110.805,lat:-8.102, size:9},
+      {name:'Manyaran',  lng:110.82,  lat:-7.822, size:9},
+      {name:'Wuryantoro',lng:110.882, lat:-7.862, size:9},
+      {name:'Purwantoro',lng:111.26,  lat:-7.835, size:9},
+      {name:'Paranggupito',lng:110.88,lat:-8.185, size:9},
+    ];
+    towns.forEach(t => label(t.name, t.lng, t.lat, t.size||10, t.color||'rgba(255,255,200,0.8)', t.bold||false));
+
+    // ── Geographic labels ──
+    if(zoom >= 10) {
+      label('Perbukitan Utara', 111.05, -7.74, 9, 'rgba(200,230,180,0.6)');
+      label('Karst Selatan', 110.85, -8.15, 9, 'rgba(200,210,160,0.6)');
+      label('Samudra Hindia', 110.90, -8.25, 10, 'rgba(100,180,220,0.7)', true);
+    }
+
+    // ── Border Kabupaten (approximate) ──
+    line([
+      [110.75,-7.70],[111.00,-7.70],[111.35,-7.72],
+      [111.38,-7.80],[111.35,-8.05],[111.20,-8.15],
+      [111.00,-8.22],[110.85,-8.26],[110.75,-8.22],[110.72,-8.10],
+      [110.72,-7.90],[110.75,-7.70]
+    ], 'rgba(255,220,100,0.35)', 1.5, [6,4]);
+
+    // ── OSM attribution ──
+    ctx.fillStyle='rgba(0,0,0,0.5)';
+    ctx.fillRect(cvs.width-210, cvs.height-18, 210, 18);
+    ctx.fillStyle='rgba(255,255,255,0.55)';
+    ctx.font='10px sans-serif'; ctx.textAlign='right'; ctx.textBaseline='bottom';
+    ctx.fillText('© Peta Wonogiri · OpenStreetMap data', cvs.width-4, cvs.height-2);
+  }
+
+  // ── Draw tiles (tries first, falls back to vector) ──
+  let tilesWorking = null; // null=unknown, true/false
+
+  function drawTiles() {
+    const cols = Math.ceil(cvs.width /TS)+2;
+    const rows = Math.ceil(cvs.height/TS)+2;
+    const sx = Math.floor(camX - cols/2);
+    const sy = Math.floor(camY - rows/2);
+    const max = 1<<zoom;
+    let anyLoaded=false, anyErr=0, anyTotal=0;
+
+    for(let dx=0;dx<=cols;dx++) for(let dy=0;dy<=rows;dy++) {
+      const tx=sx+dx, ty=sy+dy;
+      if(ty<0||ty>=max) continue;
+      const wx=((tx%max)+max)%max;
+      const [px,py]=t2c(tx,ty);
+      if(px>cvs.width+TS||py>cvs.height+TS||px<-TS||py<-TS) continue;
+      anyTotal++;
+      const tile=loadTile(wx,ty,zoom);
+      if(tile&&tile!=='loading'&&tile!=='err') {
+        ctx.drawImage(tile, Math.round(px), Math.round(py), TS+1, TS+1);
+        anyLoaded=true;
+      } else if(tile==='err') {
+        anyErr++;
+      } else {
+        // placeholder while loading
+        ctx.fillStyle='#2a3d2a';
+        ctx.fillRect(Math.round(px),Math.round(py),TS,TS);
+      }
+    }
+
+    // If most tiles errored, switch to vector permanently
+    if(anyTotal>0 && anyErr/anyTotal>0.5) tilesWorking=false;
+    else if(anyLoaded) tilesWorking=true;
+
+    return anyLoaded;
+  }
+
+  // ── Pins ──
+  function drawPin(x,y,p,hov) {
+    if(x<-50||x>cvs.width+50||y<-50||y>cvs.height+50) return;
+    const r=hov?19:15;
+    ctx.save();
+    ctx.shadowColor='rgba(0,0,0,0.7)';ctx.shadowBlur=hov?18:10;ctx.shadowOffsetY=3;
+    if(hov){
+      ctx.beginPath();ctx.arc(x,y-r,r+7,0,Math.PI*2);
+      ctx.strokeStyle=p.c+'99';ctx.lineWidth=2.5;ctx.stroke();
+    }
+    ctx.beginPath();ctx.arc(x,y-r,r,0,Math.PI*2);
+    ctx.fillStyle=p.c;ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=hov?2.5:2;ctx.stroke();
+    ctx.shadowBlur=0;
+    ctx.beginPath();ctx.moveTo(x-5,y-r+2);ctx.lineTo(x+5,y-r+2);ctx.lineTo(x,y+3);
+    ctx.closePath();ctx.fillStyle=p.c;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font=(hov?'14':'11')+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=4;
+    ctx.fillText(p.e,x,y-r);
+    ctx.restore();
+  }
+
+  // ── UI overlay (compass, zoom indicator) ──
+  function drawUI() {
+    // Dark overlay on tiles to make pins pop
+    if(tilesWorking!==false){
+      ctx.fillStyle='rgba(8,15,8,0.32)';
+      ctx.fillRect(0,0,cvs.width,cvs.height);
+    }
+    // Border
+    ctx.strokeStyle='rgba(200,146,42,0.22)';ctx.lineWidth=2;
+    ctx.strokeRect(1,1,cvs.width-2,cvs.height-2);
+    // Compass
+    const [cx2,cy2]=[40,cvs.height-40];
+    ctx.save();ctx.shadowColor='rgba(0,0,0,0.6)';ctx.shadowBlur=8;
+    ctx.fillStyle='#C8922A';ctx.beginPath();ctx.moveTo(cx2,cy2-17);ctx.lineTo(cx2-5,cy2+2);ctx.lineTo(cx2+5,cy2+2);ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.25)';ctx.beginPath();ctx.moveTo(cx2,cy2+17);ctx.lineTo(cx2-5,cy2-2);ctx.lineTo(cx2+5,cy2-2);ctx.closePath();ctx.fill();
+    ctx.shadowBlur=0;ctx.fillStyle='#E8B84B';ctx.font='bold 11px sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText('N',cx2,cy2-20);ctx.restore();
+    // Zoom badge
+    ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fillRect(4,cvs.height-20,40,16);
+    ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='10px sans-serif';
+    ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillText('z='+zoom,7,cvs.height-3);
+  }
+
+  // ── Main render ──
+  function render() {
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+
+    if(tilesWorking===false) {
+      drawVectorMap();
+    } else {
+      const loaded=drawTiles();
+      if(!loaded && tilesWorking===null) drawVectorMap();
+    }
+
+    PLACES.forEach((p,i)=>{
+      if(activeFilter!=='semua'&&p.cat!==activeFilter) return;
+      const [x,y]=ll2c(p.lng,p.lat);
+      drawPin(x,y,p,hovered===i);
+    });
+    drawUI();
+  }
+
+  // ── Popup ──
+  function showPopup(idx,cx,cy){
+    const p=PLACES[idx];
+    const cats={wisata:'Wisata Alam',kuliner:'Kuliner',oleholeh:'Oleh-oleh',kerajinan:'Kerajinan',budaya:'Budaya & Sejarah'};
+    popInner.innerHTML=`
+      <div class="popup-ph" style="background:${p.c}33">${p.e}</div>
+      <div class="popup-body">
+        <div class="popup-cat">${cats[p.cat]||p.cat}</div>
+        <div class="popup-title">${p.name}</div>
+        <div class="popup-loc">📍 ${p.kec} &nbsp;·&nbsp; ${p.r}</div>
+        <div class="popup-desc">${p.d}</div>
+        <div style="font-size:.68rem;color:#bbb;margin-top:3px">${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div>
+      </div>`;
+    let left=cx+14, top=cy-220;
+    if(left+268>cvs.width) left=cx-278;
+    popup.style.left=Math.max(4,left)+'px';
+    popup.style.top=Math.max(4,top)+'px';
+    popup.classList.add('visible');
+  }
+  function closePopup(){popup.classList.remove('visible');}
+
+  // ── Hit test ──
+  function pinAt(mx,my){
+    for(let i=PLACES.length-1;i>=0;i--){
+      if(activeFilter!=='semua'&&PLACES[i].cat!==activeFilter) continue;
+      const [px,py]=ll2c(PLACES[i].lng,PLACES[i].lat);
+      if(Math.hypot(mx-px,my-(py-15))<19) return i;
+    }
+    return -1;
+  }
+
+  // ── Mouse events ──
+  cvs.addEventListener('mousemove',e=>{
+    const r=cvs.getBoundingClientRect();
+    const mx=(e.clientX-r.left)*(cvs.width/r.width);
+    const my=(e.clientY-r.top)*(cvs.height/r.height);
+    if(dragging){
+      camX=csx-(e.clientX-dsx)/TS;
+      camY=csy-(e.clientY-dsy)/TS;
+      render(); closePopup(); return;
+    }
+    const p=pinAt(mx,my);
+    if(p!==hovered){hovered=p;cvs.style.cursor=p>=0?'pointer':'grab';render();}
+  });
+  cvs.addEventListener('mousedown',e=>{dragging=true;cvs.style.cursor='grabbing';dsx=e.clientX;dsy=e.clientY;csx=camX;csy=camY;});
+  window.addEventListener('mouseup',e=>{
+    if(!dragging)return;
+    const moved=Math.hypot(e.clientX-dsx,e.clientY-dsy);
+    dragging=false;cvs.style.cursor=hovered>=0?'pointer':'grab';
+    if(moved<5){
+      const r=cvs.getBoundingClientRect();
+      const mx=(e.clientX-r.left)*(cvs.width/r.width);
+      const my=(e.clientY-r.top)*(cvs.height/r.height);
+      const p=pinAt(mx,my);
+      p>=0?showPopup(p,mx,my):closePopup();
+    }
+  });
+  cvs.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const r=cvs.getBoundingClientRect();
+    const mx=(e.clientX-r.left)*(cvs.width/r.width);
+    const my=(e.clientY-r.top)*(cvs.height/r.height);
+    const [tx,ty]=c2t(mx,my);
+    const nz=Math.max(8,Math.min(16,zoom+(e.deltaY<0?1:-1)));
+    if(nz===zoom)return;
+    const s=Math.pow(2,nz-zoom);
+    camX=tx*s-(mx-cvs.width/2)/TS;
+    camY=ty*s-(my-cvs.height/2)/TS;
+    zoom=nz;
+    render();closePopup();
+  },{passive:false});
+
+  // Touch
+  let lp=0;
+  cvs.addEventListener('touchstart',e=>{
+    if(e.touches.length===1){dragging=true;dsx=e.touches[0].clientX;dsy=e.touches[0].clientY;csx=camX;csy=camY;}
+    else if(e.touches.length===2) lp=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+  },{passive:true});
+  cvs.addEventListener('touchmove',e=>{
+    e.preventDefault();
+    if(e.touches.length===1&&dragging){camX=csx-(e.touches[0].clientX-dsx)/TS;camY=csy-(e.touches[0].clientY-dsy)/TS;render();}
+    else if(e.touches.length===2){
+      const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if(d>lp*1.12)zoomMap(1);else if(d<lp*0.88)zoomMap(-1);lp=d;
+    }
+  },{passive:false});
+  cvs.addEventListener('touchend',()=>{dragging=false;});
+
+  // ── Controls ──
+  function zoomMap(delta){
+    const nz=Math.max(8,Math.min(16,zoom+delta));
+    if(nz===zoom)return;
+    const s=Math.pow(2,nz-zoom);
+    camX=(camX-cvs.width/2/TS)*s+cvs.width/2/TS;
+    camY=(camY-cvs.height/2/TS)*s+cvs.height/2/TS;
+    zoom=nz; render();closePopup();
+  }
+  function resetMap(){
+    zoom=10;camX=lng2t(110.965,zoom);camY=lat2t(-7.97,zoom);
+    render();closePopup();
+  }
+  function filterMap(cat,btn){
+    document.querySelectorAll('.mf-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');activeFilter=cat;closePopup();render();
+  }
+
+  window.addEventListener('resize',()=>{initSize();render();});
+  initSize(); render();
+</script>
+</body>
+</html>
