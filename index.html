@@ -1339,7 +1339,7 @@
 
   // ── Main render ──
   function render(){
-    if(cvs.width < 10){ initCvs(); } // safety guard
+    if(!cvs || cvs.width < 10){ if(cvs) initCvs(); return; } // safety guard
     ctx.clearRect(0,0,cvs.width,cvs.height);
     // Always draw vector map first as base layer
     drawVector();
@@ -1364,7 +1364,8 @@
              p.d.toLowerCase().includes(q)||(CAT_LABELS[p.cat]||'').toLowerCase().includes(q);
     });
     if(rcEl) rcEl.textContent = visiblePlaces.length + ' lokasi';
-    hovered=-1; render();
+    hovered=-1;
+    render();
   }
 
   function setFilter(cat,btn){
@@ -1485,23 +1486,30 @@
 
   window.addEventListener('resize',()=>{ initCvs(); render(); closePopup(); });
 
-  // ── Init — use ResizeObserver so canvas inits AFTER layout is computed ──
+  // ── BULLETPROOF MAP INIT ──
   function startMap(){
     initCvs();
-    // If canvas still has no width (e.g. hidden by reveal class), retry
+    // Canvas might still be 0 if layout not ready yet
     if(cvs.width < 10){
-      setTimeout(startMap, 100);
+      setTimeout(startMap, 150);
       return;
     }
     initCam();
-    updateVisible();
+    updateVisible(); // calls render() internally
   }
 
-  // Watch for when the map-wrap becomes visible
+  // Try multiple init strategies to guarantee map renders
+  // 1. Immediately
+  setTimeout(startMap, 0);
+  // 2. After DOM is painted
+  setTimeout(startMap, 300);
+  // 3. After full page load
+  window.addEventListener('load', () => setTimeout(startMap, 100));
+  // 4. ResizeObserver when wrap gets dimensions
   if(window.ResizeObserver){
     const ro = new ResizeObserver(entries => {
       for(const e of entries){
-        if(e.contentRect.width > 0){
+        if(e.contentRect.width > 10){
           ro.disconnect();
           startMap();
           break;
@@ -1510,8 +1518,6 @@
     });
     ro.observe(wrap);
   }
-  // Fallback
-  setTimeout(startMap, 200);
 </script>
 </body>
 </html>
