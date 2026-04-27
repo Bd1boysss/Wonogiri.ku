@@ -878,36 +878,80 @@
   };
 
 
-  // Real photos from Google Places
+  // Unsplash photos — no CORS, loads everywhere
   const PLACE_PHOTOS = {
-    'Gajah Mungkur (OW)':'https://lh3.googleusercontent.com/place-photos/AJRVUZPkoDLmmQIxT1TBH3ud6H9YFzPIxD1lm4R0ffnRf3hQdC_XONxBXgmQd2gv4vzX68IH8BqNxF5RCbjOetRKqBl4KYIHrqWbiCxnR2G2Njt5_O3YxJ-ZOitGkCvQn07ohh3WXSrCXae97kwrjA=s600-w600-h400',
-    'Waduk Gajah Mungkur':'https://lh3.googleusercontent.com/place-photos/AJRVUZO6SArmBh-6Ehf1cE1AUmlQXN27dbMkqQDrAckH8DZd174MCCjulI_XENtawkLGBfW4ZICyPraecbND3HTZyi-CCt-3nSazADglv57JsqueP9xqPSDNJVqNElAsk-1LKDucpPFeMMt6A=s600-w600-h400',
-    'Pantai Gading Purba':'https://lh3.googleusercontent.com/place-photos/AJRVUZMI76Y5mEPWXSTfjjniHuHhZzQMZfqoOfNxlKLpm9On6bj6wFt6cBjN4dQnAG5osOOXPhcIcqCixhkAOaw2yRc8Wt9PcrHeZAD8s6g6L2voLtfqpSmOd6MpeKJohsUElrf9fywKA43Mr3xKQA=s600-w600-h400',
-    'Pantai Nampu':'https://lh3.googleusercontent.com/place-photos/AJRVUZNNs_Jmr1CHelLXDxVdUYqUiAi5ZN9RlcQo1uvEr_fr-fQir0xarv1mBvf_c8Or7LKM-iuyiPNvwAwsfEYE4-6IyNC1MhXt1hR9jJIq9xkp3FLR9YFRJ0bqL7yAR-IJ4r-pOoJHbee7WkyoFpU=s600-w600-h400',
-    'Pantai Kwaru Gunturharjo':'https://lh3.googleusercontent.com/place-photos/AJRVUZP4hhY5zISLwyrAUiibBMiITvxfdMzUvaKzoiEinjBFgBouguNc0V4fo1URMpRSxHrrsK9CT-NGzP3PkrgLmzYDRcQik_jy7san6IQDOTAWhY6_0SELy9DXb7gzb40iv6lHxxZKjb4r5bCi_A=s600-w600-h400',
-    'Bukit Cumbri':'https://lh3.googleusercontent.com/place-photos/AJRVUZO3QluspZUT4NlzKvNaBePTK8YkYQYgIx62TmRtDgSU30L5IQKI3Bk-4-_eNNLChXv12ED-d_lg2bM-_baOZCcj_YRcRMPqoimXLyCmpH6pjJ6g0EGD6N3iaRHBvWUSjgyciGC1XFmgy2TBR1RCTHod=s600-w600-h400',
-    'Watu Cenik':'https://lh3.googleusercontent.com/place-photos/AJRVUZM9uuVIokcm_ol4DQv4j_5xRySBc2VwIPI2vGdZ17Ch5AnrVFNCQOnLek4HNjMFk1pYoyUM2vqBTYyLZLrpwv3884TUZe0D2NNuliIf7Vq94O67xLl6GZCU2IYxjMBeXvz1yqimsSpIdpg5YSU=s600-w600-h400',
-    'Puncak Joglo':'https://lh3.googleusercontent.com/place-photos/AJRVUZPAK907wCX-mZLkGXLJtkvFe967KzFJS5UbvhcmoyHvH2-JVqXt318i_Rns0XL1Vv9jsI_bhPzXnXIlC69P5ZFKHSXFqajjKNxvaihvoMi3DkUeUIYW381di_5_d-bp5-BNL-f8ta2UDDlc=s600-w600-h400',
-    'Goa Putri Kencana':'https://lh3.googleusercontent.com/place-photos/AJRVUZP_E98Ya8PlyR3YR1LtAVS4YS9QNf7dG7MeZ__fq7C8BzKwZlKVhIqd2EogndWMwDqd3pghSDqLTkn0S23ZNKQbe357JJzh9Hc1CWXxVCN9Qb2vn8Uvj82A_YwozSiltkCVTDKU5fjK_drN=s600-w600-h400',
-    'Kahyangan Dlepih':'https://lh3.googleusercontent.com/place-photos/AJRVUZPHrcdeOPcGFm1nz81TNpXCmE7Pz-bcW0tI2NKA2fkhRrgSmF3saPNsPr-53Qjv4AvLdwyBI_qgVdzo4XHgpRVVNwf8lf_gL7Y0N6y_8rAsqMtlMEqDp98K07_YkFA3fLm8g6SndW_O7jYTkg=s600-w600-h400',
-    'Telaga Claket':'https://lh3.googleusercontent.com/place-photos/AJRVUZN1-4rHy_YzNMgDXx-SJ8j09fUwGVwP_zxBwvWYYQgZn43YJDdM4J87avExFRFuC_spRmhBqn8D6RdHQcRBxTa1wxWOJqrduiDLR38OW-KJ-tOw-4GUU3gZsCPA4O-eZckv1atiFLjV7_IE=s600-w600-h400',
-    'KOITO BATUGA':'https://lh3.googleusercontent.com/place-photos/AJRVUZOrdzwHAAvei4RWXSfH-Cjv4I_p8kN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
-    'Soto Kwali Mbak Nunik':'https://lh3.googleusercontent.com/place-photos/AJRVUZMSLuPU30-_8W0o2mTUPbZtUl03JCpqmkO1KaBnvuaqTsU1x2tFQkzGTLKWSFinLPAzIzyrxcyqQKo_WXt6PsLcluCTdSOysdj6MOaJ4CrExpKvUk3r2OaN4Z_e1ZFD55eTK8czcg8LfUd16g=s600-w600-h400',
-    'Soto Patung Sapu':'https://lh3.googleusercontent.com/place-photos/AJRVUZMyr7N9touKOCCQNDtvvXZPJfog0eDnsCfpJChJzcd7jGu1u0nhljOXLcYOHa5JEwQy1-ygMTMT-6pakRcXT0PG4f9ZAys-asGQP0COuwI0S1YeoCog8zadTce50hE18HTITlGXFxg5BDFSxQ=s600-w600-h400',
-    'Oleh-oleh Khas (Waduk)':'https://lh3.googleusercontent.com/place-photos/AJRVUZO-Pcqf_r35-QCExMo_el6nji-6WJ5hH4-Ds30HiyXSXmOHvn-uDJ0OsurKBDTsCjAh5DzPT3YPOMaRfBUw1EAU6M3kN2-P5Ni7ip4fmYMH4GvCDKeHuEhGlDr1yI18fN5ntx1arr0H1sqedP4=s600-w600-h400',
-    'Pusat Oleh-oleh Sari Rasa':'https://lh3.googleusercontent.com/place-photos/AJRVUZMdHI_Q80GBQBkrV759JuU5xTAuSQ9y_h6p8lRMJEfWtkGL2kTUMwWgrScifN1vXWn_eajGzuzEDc8_b6fQOWz6klyO8Bu6dMB7zvRuZ1PdEaQ2UnO5rVjesxqL2eRDDcWGKKo5RHP5m1v5Wg=s600-w600-h400',
-    'Kripik Cap Melati':'https://lh3.googleusercontent.com/place-photos/AJRVUZNQPtYh6M8YMg0rwF3KZm6JqxjVCagzYxRpBkCzmaf9a6L56sw7ve3bbdQ88ZRxGftrvQGnxhhwNPjJazoAwxqqj-x2jDUI01Jtp6CJQ8lWDmkDXqElW1ENZKfx3Q-HZ_RAX-AuS0dPVx5VeA=s600-w600-h400',
-    'Pak Glinding':'https://lh3.googleusercontent.com/place-photos/AJRVUZNiW_kF8mN3qBr6StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
-    'RM Sari Raras 2':'https://lh3.googleusercontent.com/place-photos/AJRVUZO5RIzEMMtei4R0SVDbvRv8LQ_kF7mN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
-    'Gunung Kelir':'https://lh3.googleusercontent.com/place-photos/AJRVUZOGkMl2pN3qBr8StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
-    'Air Terjun Girimanik':'https://lh3.googleusercontent.com/place-photos/AJRVUZOzkMl2pMwqBr2StWzGbFwIXnCXN3mPuLjxZ2BhPS0xRiV1cVnEzc9oHk2KqI3rAyuByWXmMxPnD7eI0lOh9kPi1JpZuHGy_waK=s600-w600-h400',
-    'Air Terjun Banyu Nibo':'https://lh3.googleusercontent.com/place-photos/AJRVUZOykMl2pMvqBr1StVzGaFwIXnCWN2mPuLjwZ1BhPTzwRiV0cUnDzb8nHj1JpH2qAxsBxVWlLwOmC6dH9kOg8jOh0kPi0IoYuGFy_vaJ=s600-w600-h400',
-    'Sasino Coffee Shop':'https://lh3.googleusercontent.com/place-photos/AJRVUZOr8Sr3e0wvei4Rw1m3WJcZAGM_p8jM2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
-    'Golden Resto Wonogiri':'https://lh3.googleusercontent.com/place-photos/AJRVUZPkMr8B9yVa3vHmLQi7iZiOFMkSJFu2J4Ls3aNYsJXUYM1jOBi7kU2nAl4Q2T5xR6P9kMzYFGkZCnL0nFiK7OqCxGHdz_5bB=s600-w600-h400',
-    'Masjid Agung At Taqwa':'https://lh3.googleusercontent.com/place-photos/AJRVUZOfkMl2pMcqBqiStCzGHFwIXnCEMuVPuLjeLzBQPSglRiDkKCYOlKqgQicTZSkZCsiVgHGiRDhXXY5NR2ULLpBPOabbbfXYZcCJScW_daS=s600-w600-h400',
-    'GOA RESI Bulukerto':'https://lh3.googleusercontent.com/place-photos/AJRVUZPuRfeY0NyPeS4RqJSXWYoLSyI_kF8mN3qBr6StY4GhFwJXnCdN9mPuLk3Z8BhQT6xRjV7cWnF5dKpHl8LrO9sB3vCzXYsN3QoHDfJ6mPi7KqFyJIz_2aQ=s600-w600-h400',
-    'Sentra Batik Wonogiren':'https://lh3.googleusercontent.com/place-photos/AJRVUZOiJzYg0Dkuei4R6ufPEMVU-Y_p8kN2qBr5StY3GgFwJXnCcN8mPuLk2Z7BhQT5xRjV6cWnF4dKpHl7LrN8sB2vCzXYrN2QoGCfJ5mPi6KqExIHz_1aP=s600-w600-h400',
-  };
+    // Waduk
+    'Gajah Mungkur (OW)'       :'https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?w=600&h=400&fit=crop',
+    'Waduk Gajah Mungkur'      :'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop',
+    'Pantai Gading Purba'      :'https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&h=400&fit=crop',
+    'Golden Resto Wonogiri'    :'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop',
+    'Pak Glinding'             :'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&h=400&fit=crop',
+    'RM Sari Raras 2'          :'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop',
+    // Pantai
+    'Pantai Nampu'             :'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop',
+    'Pantai Kwaru Gunturharjo' :'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&h=400&fit=crop',
+    'Pantai Kali Mirah'        :'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&h=400&fit=crop',
+    // Bukit
+    'Bukit Cumbri'             :'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=400&fit=crop',
+    'Jalur Cumbri Pagerukir'   :'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=400&fit=crop',
+    'Gunung Kelir'             :'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
+    'Bukit Sejati'             :'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&h=400&fit=crop',
+    'Puncak Dewa Dewi'         :'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&h=400&fit=crop',
+    'Bukit Widodaren'          :'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=400&fit=crop',
+    'Bukit Glodakan'           :'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop',
+    'Watu Cenik'               :'https://images.unsplash.com/photo-1439853949212-36652a89a2a4?w=600&h=400&fit=crop',
+    'Puncak Joglo'             :'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&h=400&fit=crop',
+    // Goa
+    'Goa Putri Kencana'        :'https://images.unsplash.com/photo-1555652736-e92021d28a10?w=600&h=400&fit=crop',
+    'Goa Tembus Pracimantoro'  :'https://images.unsplash.com/photo-1565550619808-9bcb0e7f6e95?w=600&h=400&fit=crop',
+    'Goa Potro Bunder'         :'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&h=400&fit=crop',
+    'GOA RESI Bulukerto'       :'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&h=400&fit=crop',
+    // Air Terjun
+    'Air Terjun Girimanik'     :'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=600&h=400&fit=crop',
+    'Air Terjun Banyu Nibo'    :'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=400&fit=crop',
+    'Air Terjun Sanginan'      :'https://images.unsplash.com/photo-1564419320461-6870880221ad?w=600&h=400&fit=crop',
+    'Air Terjun Claket'        :'https://images.unsplash.com/photo-1546768292-fb12f6c92568?w=600&h=400&fit=crop',
+    'Curug Kemukus'            :'https://images.unsplash.com/photo-1552083974-186346191183?w=600&h=400&fit=crop',
+    'Niagara Bed Wonogiri'     :'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=600&h=400&fit=crop',
+    // Kuliner
+    'KOITO BATUGA'             :'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=400&fit=crop',
+    'RM Prasmanan Pak To'      :'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop',
+    'Angkringan Sopo Ngiro'    :'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop',
+    'Warung Gudeg Bu Saman'    :'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=400&fit=crop',
+    'Sego Sambel Selera Nusantara':'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop',
+    'Soto Kwali Mbak Nunik'    :'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&h=400&fit=crop',
+    'Soto Patung Sapu'         :'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&h=400&fit=crop',
+    // Kafe
+    'Sasino Coffee Shop'       :'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&h=400&fit=crop',
+    'COZY COFFEE & RESTO'      :'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop',
+    'Soko Langit'              :'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+    '1/5 Coffee'               :'https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=600&h=400&fit=crop',
+    'Sunny Story Coffee'       :'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop',
+    'NEW LODJI Coffee & Resto' :'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&h=400&fit=crop',
+    'Mecamocha'                :'https://images.unsplash.com/photo-1442975631134-d68d406a7b44?w=600&h=400&fit=crop',
+    // Oleh-oleh
+    'Oleh-oleh Khas (Waduk)'   :'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=400&fit=crop',
+    'Pusat Oleh-oleh Sari Rasa':'https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=600&h=400&fit=crop',
+    'Brownies Thiwool'         :'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&h=400&fit=crop',
+    'Kripik Cap Melati'        :'https://images.unsplash.com/photo-1621956838481-f8f616950189?w=600&h=400&fit=crop',
+    'Oleh-Oleh Onyx Craft'     :'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop',
+    'Pusat Oleh-oleh Haji & Umrah':'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=600&h=400&fit=crop',
+    // Kerajinan
+    'Sentra Batik Wonogiren'   :'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
+    'TSP Batik Wonogiren'      :'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&h=400&fit=crop',
+    'Batik Ciprat Karya Barokah':'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=400&fit=crop',
+    'SIDOBATIK Ngadirojo'      :'https://images.unsplash.com/photo-1544441893-675973e31985?w=600&h=400&fit=crop',
+    'Rifky Batik Store'        :'https://images.unsplash.com/photo-1591709162730-3aed5e9d698c?w=600&h=400&fit=crop',
+    'Kerajinan Bambu Manyaran' :'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=600&h=400&fit=crop',
+    // Budaya
+    'Kahyangan Dlepih'         :'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&h=400&fit=crop',
+    'Masjid Tiban Wonokerso'   :'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&h=400&fit=crop',
+    'Masjid Agung At Taqwa'    :'https://images.unsplash.com/photo-1585468274952-66591eb14165?w=600&h=400&fit=crop',
+    'Masjid Tiban Bakalan'     :'https://images.unsplash.com/photo-1519817650390-64a93db51149?w=600&h=400&fit=crop',
+    // Keluarga
+    'Telaga Claket'            :'https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?w=600&h=400&fit=crop',
+    'Soko Langit Waterpark'    :'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+  }
 
     let cardFilter = 'semua';
   let cardPage = 0;
