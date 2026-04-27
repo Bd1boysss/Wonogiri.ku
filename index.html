@@ -591,8 +591,8 @@
       <button class="mf-btn" onclick="filterMap('kerajinan',this)">🎨 Kerajinan</button>
       <button class="mf-btn" onclick="filterMap('budaya',this)">🏛 Budaya</button>
     </div>
-    <div class="map-wrap reveal">
-      <canvas id="wMap"></canvas>
+    <div class="map-wrap">
+      <canvas id="wMap" style="width:100%;height:580px;display:block;background:#1a2e1a;cursor:grab"></canvas>
       <div class="map-zoom-btns">
         <button class="mzb" onclick="zoomMap(1)" title="Zoom In">+</button>
         <button class="mzb" onclick="zoomMap(-1)" title="Zoom Out">−</button>
@@ -615,7 +615,7 @@
       <h2 class="sec-title">Peta Wonogiri — 60+ Lokasi Real</h2>
       <p class="sec-sub">Cari & filter lokasi, klik pin untuk detail. Scroll zoom, drag untuk geser peta.</p>
     </div>
-    <div class="map-toolbar reveal">
+    <div class="map-toolbar">
       <div class="map-search-wrap">
         <input type="text" id="mapSearch" placeholder="🔍  Cari lokasi, kecamatan, kategori..." autocomplete="off" oninput="onSearch(this.value)" />
         <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
@@ -635,8 +635,8 @@
         <button class="mf-btn" onclick="setFilter('keluarga',this)">👨‍👩‍👧 Keluarga</button>
       </div>
     </div>
-    <div class="map-wrap reveal">
-      <canvas id="wMap"></canvas>
+    <div class="map-wrap">
+      <canvas id="wMap" style="width:100%;height:580px;display:block;background:#1a2e1a;cursor:grab"></canvas>
       <div class="map-zoom-btns">
         <button class="mzb" onclick="zoomMap(1)" title="Zoom In">+</button>
         <button class="mzb" onclick="zoomMap(-1)" title="Zoom Out">−</button>
@@ -1091,7 +1091,13 @@
   const CACHE = {};
 
   function initCam(){ camX=lng2t(110.97,zoom); camY=lat2t(-7.97,zoom); }
-  function initCvs(){ cvs.width=Math.max(300,wrap.clientWidth); cvs.height=580; }
+  function initCvs(){
+    const rect = wrap.getBoundingClientRect();
+    cvs.width  = Math.max(300, rect.width || wrap.offsetWidth || wrap.clientWidth || 900);
+    cvs.height = 580;
+    cvs.style.width  = '100%';
+    cvs.style.height = '580px';
+  }
 
   function t2c(tx,ty){ return [(tx-camX)*TS+cvs.width/2, (ty-camY)*TS+cvs.height/2]; }
   function c2t(cx,cy){ return [(cx-cvs.width/2)/TS+camX, (cy-cvs.height/2)/TS+camY]; }
@@ -1256,6 +1262,7 @@
 
   // ── Main render ──
   function render(){
+    if(cvs.width < 10){ initCvs(); } // safety guard
     ctx.clearRect(0,0,cvs.width,cvs.height);
     // Always draw vector map first as base layer
     drawVector();
@@ -1401,8 +1408,33 @@
 
   window.addEventListener('resize',()=>{ initCvs(); render(); closePopup(); });
 
-  // ── Init ──
-  initCvs(); initCam(); updateVisible();
+  // ── Init — use ResizeObserver so canvas inits AFTER layout is computed ──
+  function startMap(){
+    initCvs();
+    // If canvas still has no width (e.g. hidden by reveal class), retry
+    if(cvs.width < 10){
+      setTimeout(startMap, 100);
+      return;
+    }
+    initCam();
+    updateVisible();
+  }
+
+  // Watch for when the map-wrap becomes visible
+  if(window.ResizeObserver){
+    const ro = new ResizeObserver(entries => {
+      for(const e of entries){
+        if(e.contentRect.width > 0){
+          ro.disconnect();
+          startMap();
+          break;
+        }
+      }
+    });
+    ro.observe(wrap);
+  }
+  // Fallback
+  setTimeout(startMap, 200);
 </script>
 </body>
 </html>
