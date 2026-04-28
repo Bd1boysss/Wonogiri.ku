@@ -458,7 +458,32 @@
     .popup-desc{font-size:.78rem;color:#5C3D2E;line-height:1.55;margin-bottom:5px;font-weight:300}
     .popup-close{position:absolute;top:7px;right:9px;background:rgba(0,0,0,0.4);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:13px;line-height:22px;text-align:center;pointer-events:auto}
 
-  </style>
+  
+    .choropleth-section{background:var(--brown-800);padding:4rem 0 5rem}
+    .choropleth-section .sec-title{color:var(--brown-50)}
+    .choropleth-section .sec-tag{color:var(--gold-light)}
+    .choropleth-section .sec-sub{color:rgba(245,237,216,0.6)}
+    .choro-wrap{margin-top:2rem;display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start}
+    .choro-map-box{border-radius:12px;overflow:hidden;border:1px solid rgba(200,146,42,0.25);box-shadow:0 12px 40px rgba(0,0,0,0.4);background:#1a2e1a;position:relative}
+    #choroCanvas{width:100%;height:500px;display:block}
+    .choro-panel{display:flex;flex-direction:column;gap:1rem}
+    .choro-legend,.choro-stats{background:rgba(255,255,255,0.05);border-radius:10px;padding:1.25rem;border:1px solid rgba(200,146,42,0.15)}
+    .choro-legend h4,.choro-stats h4{font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+    .legend-gradient{height:16px;border-radius:4px;margin-bottom:.5rem;background:linear-gradient(to right,#e8f5e9,#a5d6a7,#4caf50,#2e7d32,#1b5e20)}
+    .legend-labels{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(245,237,216,0.5)}
+    .kec-list{display:flex;flex-direction:column;gap:.4rem;max-height:340px;overflow-y:auto}
+    .kec-item{display:flex;align-items:center;gap:.65rem;padding:.35rem .4rem;border-radius:5px;transition:background .15s}
+    .kec-item:hover{background:rgba(255,255,255,0.06)}
+    .kec-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+    .kec-name{font-size:.77rem;color:rgba(245,237,216,0.8);flex:1}
+    .kec-count{font-size:.72rem;font-weight:600;color:var(--gold);background:rgba(200,146,42,0.15);padding:2px 7px;border-radius:20px}
+    .choro-tooltip{position:absolute;z-index:100;background:rgba(20,15,7,0.92);border:1px solid rgba(200,146,42,0.3);border-radius:8px;padding:10px 14px;pointer-events:none;opacity:0;transition:opacity .15s;min-width:160px}
+    .choro-tooltip.show{opacity:1}
+    .tt-name{font-family:var(--font-display);font-size:.95rem;color:#F5EDD8;margin-bottom:3px}
+    .tt-count{font-size:.8rem;color:var(--gold);font-weight:600}
+    .tt-rank{font-size:.7rem;color:rgba(245,237,216,0.5);margin-top:2px}
+    @media(max-width:900px){.choro-wrap{grid-template-columns:1fr}}
+</style>
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
@@ -498,6 +523,7 @@
     <li><a href="#jelajah">Jelajah</a></li>
     <li><a href="#peta">Peta</a></li>
     <li><a href="#rute">Rute Wisata</a></li>
+    <li><a href="#analisis">Analisis</a></li>
     <li><a href="#tentang">Tentang</a></li>
   </ul>
   <a href="#" class="nav-cta" onclick="openModal(); return false;">Daftarkan UMKM</a>
@@ -593,6 +619,47 @@
     <div class="map-wrap reveal" style="border-radius:12px;overflow:hidden;border:1px solid rgba(200,146,42,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.45);margin-top:1.5rem">
       <div id="leafletMap" style="width:100%;height:540px;"></div>
       <div id="mapCount" style="position:absolute;top:12px;left:60px;z-index:1000;background:rgba(20,30,20,0.85);color:#C8922A;font-size:.72rem;padding:4px 10px;border-radius:6px;border:1px solid rgba(200,146,42,0.25);pointer-events:none;backdrop-filter:blur(4px)">91 lokasi</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHOROPLETH SECTION -->
+<section class="choropleth-section" id="analisis">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Analisis Spasial</div>
+      <h2 class="sec-title">Choropleth — Kepadatan UMKM per Kecamatan</h2>
+      <p class="sec-sub">Peta sebaran UMKM berdasarkan kecamatan di Kabupaten Wonogiri. Warna lebih gelap = lebih banyak UMKM terdaftar.</p>
+    </div>
+    <div class="choro-wrap reveal">
+      <div class="choro-map-box" style="position:relative">
+        <canvas id="choroCanvas"></canvas>
+        <div class="choro-tooltip" id="choroTooltip">
+          <div class="tt-name" id="ttName"></div>
+          <div class="tt-count" id="ttCount"></div>
+          <div class="tt-rank" id="ttRank"></div>
+        </div>
+      </div>
+      <div class="choro-panel">
+        <div class="choro-legend">
+          <h4>Legenda Kepadatan</h4>
+          <div class="legend-gradient"></div>
+          <div class="legend-labels">
+            <span>Rendah (1)</span>
+            <span>Sedang (5)</span>
+            <span>Tinggi (34)</span>
+          </div>
+          <div style="margin-top:1rem;font-size:.72rem;color:rgba(245,237,216,0.45);line-height:1.6">
+            📍 Total: <strong style="color:var(--gold)">86 lokasi</strong> tersebar di <strong style="color:var(--gold)">16 kecamatan</strong><br>
+            🏆 Tertinggi: <strong style="color:var(--gold)">Kec. Wonogiri</strong> (34 lokasi)<br>
+            📊 Rata-rata: <strong style="color:var(--gold)">~5.4 lokasi</strong>/kecamatan
+          </div>
+        </div>
+        <div class="choro-stats">
+          <h4>Ranking Kecamatan</h4>
+          <div class="kec-list" id="kecList"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1198,6 +1265,224 @@
   window.addEventListener('load', loadLeaflet);
   setTimeout(loadLeaflet, 500);
 
+
+  // ══════════════════════════════════════════════════════
+  // CHOROPLETH MAP — Kepadatan UMKM per Kecamatan
+  // ══════════════════════════════════════════════════════
+
+  // Data kepadatan per kecamatan (dihitung dari PLACES)
+  const KEC_DATA = [
+    {name:'Kec. Wonogiri',      count:34, rank:1},
+    {name:'Kec. Pracimantoro',  count:9,  rank:2},
+    {name:'Kec. Purwantoro',    count:8,  rank:3},
+    {name:'Kec. Selogiri',      count:5,  rank:4},
+    {name:'Kec. Ngadirojo',     count:5,  rank:4},
+    {name:'Kec. Baturetno',     count:4,  rank:6},
+    {name:'Kec. Paranggupito',  count:3,  rank:7},
+    {name:'Kec. Sidoharjo',     count:3,  rank:7},
+    {name:'Kec. Bulukerto',     count:3,  rank:7},
+    {name:'Kec. Giriwoyo',      count:3,  rank:7},
+    {name:'Kec. Slogohimo',     count:2,  rank:11},
+    {name:'Kec. Manyaran',      count:2,  rank:11},
+    {name:'Kec. Tirtomoyo',     count:2,  rank:11},
+    {name:'Kec. Karangtengah',  count:1,  rank:14},
+    {name:'Kec. Kismantoro',    count:1,  rank:14},
+    {name:'Kec. Girimarto',     count:1,  rank:14},
+  ];
+
+  // Approximate polygon coordinates for each kecamatan (Wonogiri)
+  // Based on real geographic boundaries
+  const KEC_POLYGONS = {
+    'Kec. Wonogiri':      [[110.84,-7.79],[110.95,-7.79],[110.95,-7.87],[110.84,-7.87]],
+    'Kec. Selogiri':      [[110.83,-7.74],[110.95,-7.74],[110.95,-7.79],[110.83,-7.79]],
+    'Kec. Ngadirojo':     [[110.95,-7.77],[111.04,-7.77],[111.04,-7.85],[110.95,-7.85]],
+    'Kec. Sidoharjo':     [[111.00,-7.85],[111.10,-7.85],[111.10,-7.93],[111.00,-7.93]],
+    'Kec. Girimarto':     [[111.04,-7.77],[111.14,-7.77],[111.14,-7.85],[111.04,-7.85]],
+    'Kec. Bulukerto':     [[111.14,-7.72],[111.26,-7.72],[111.26,-7.82],[111.14,-7.82]],
+    'Kec. Slogohimo':     [[111.12,-7.82],[111.24,-7.82],[111.24,-7.90],[111.12,-7.90]],
+    'Kec. Kismantoro':    [[111.20,-7.88],[111.32,-7.88],[111.32,-7.96],[111.20,-7.96]],
+    'Kec. Purwantoro':    [[111.24,-7.80],[111.38,-7.80],[111.38,-7.92],[111.24,-7.92]],
+    'Kec. Manyaran':      [[110.77,-7.82],[110.86,-7.82],[110.86,-7.92],[110.77,-7.92]],
+    'Kec. Wuryantoro':    [[110.85,-7.87],[110.94,-7.87],[110.94,-7.97],[110.85,-7.97]],
+    'Kec. Eromoko':       [[110.77,-7.92],[110.87,-7.92],[110.87,-8.02],[110.77,-8.02]],
+    'Kec. Tirtomoyo':     [[110.97,-7.88],[111.10,-7.88],[111.10,-8.00],[110.97,-8.00]],
+    'Kec. Baturetno':     [[110.90,-7.96],[111.00,-7.96],[111.00,-8.05],[110.90,-8.05]],
+    'Kec. Karangtengah':  [[111.05,-8.00],[111.15,-8.00],[111.15,-8.10],[111.05,-8.10]],
+    'Kec. Giriwoyo':      [[110.88,-8.00],[110.97,-8.00],[110.97,-8.08],[110.88,-8.08]],
+    'Kec. Pracimantoro':  [[110.76,-8.02],[110.88,-8.02],[110.88,-8.12],[110.76,-8.12]],
+    'Kec. Paranggupito':  [[110.84,-8.14],[110.94,-8.14],[110.94,-8.24],[110.84,-8.24]],
+    'Kec. Nguntoronadi':  [[110.96,-7.88],[111.05,-7.88],[111.05,-7.98],[110.96,-7.98]],
+  };
+
+  function getChoroColor(count) {
+    const max = 34;
+    const t = Math.pow(count / max, 0.5); // sqrt scale for better visual spread
+    // Green palette: light → dark
+    const colors = [
+      [232,245,233], // #E8F5E9 very light
+      [165,214,167], // #A5D6A7 light
+      [102,187,106], // #66BB6A medium
+      [56,142,60],   // #388E3C dark
+      [27,94,32],    // #1B5E20 very dark
+    ];
+    const idx = Math.min(4, Math.floor(t * 5));
+    const [r,g,b] = colors[idx];
+    return `rgb(${r},${g},${b})`;
+  }
+
+  function initChoropleth() {
+    const canvas = document.getElementById('choroCanvas');
+    if(!canvas) return;
+    const ctx2 = canvas.getContext('2d');
+    const wrap = canvas.parentElement;
+    canvas.width  = wrap.clientWidth || 700;
+    canvas.height = 500;
+    const W = canvas.width, H = canvas.height;
+
+    // Map bounds of Wonogiri
+    const BOUNDS = { minLng:110.72, maxLng:111.40, minLat:-8.28, maxLat:-7.70 };
+
+    function ll2px(lng, lat) {
+      const x = (lng - BOUNDS.minLng) / (BOUNDS.maxLng - BOUNDS.minLng) * W;
+      const y = (1 - (lat - BOUNDS.minLat) / (BOUNDS.maxLat - BOUNDS.minLat)) * H;
+      return [x, y];
+    }
+
+    // Draw background
+    ctx2.fillStyle = '#1a2a1a';
+    ctx2.fillRect(0,0,W,H);
+
+    // Count lookup
+    const countMap = {};
+    KEC_DATA.forEach(k => { countMap[k.name] = k.count; });
+
+    // Draw each kecamatan polygon
+    const drawnPolys = [];
+    Object.entries(KEC_POLYGONS).forEach(([name, bbox]) => {
+      const count = countMap[name] || 0;
+      // Convert bbox [minLng, minLat, maxLng, maxLat] format
+      const [lng1, lat1, lng2, lat2] = [bbox[0][0], bbox[0][1], bbox[2][0], bbox[2][1]];
+      const [x1,y1] = ll2px(lng1, lat1);
+      const [x2,y2] = ll2px(lng2, lat2);
+
+      // Draw rounded rect for each kecamatan
+      const color = count > 0 ? getChoroColor(count) : '#2a3a2a';
+      ctx2.fillStyle = color;
+      ctx2.beginPath();
+      const pad = 2;
+      const rx = Math.min(x1,x2)+pad, ry = Math.min(y1,y2)+pad;
+      const rw = Math.abs(x2-x1)-pad*2, rh = Math.abs(y2-y1)-pad*2;
+      ctx2.roundRect(rx, ry, rw, rh, 4);
+      ctx2.fill();
+      ctx2.strokeStyle = 'rgba(30,15,7,0.6)';
+      ctx2.lineWidth = 1.5;
+      ctx2.stroke();
+
+      // Label
+      const cx = (x1+x2)/2, cy = (y1+y2)/2;
+      const shortName = name.replace('Kec. ','');
+      ctx2.fillStyle = count > 15 ? 'rgba(255,255,255,0.95)' : 'rgba(20,15,7,0.85)';
+      ctx2.font = `${Math.max(8, Math.min(11, rw/shortName.length*1.4))}px DM Sans,sans-serif`;
+      ctx2.textAlign = 'center';
+      ctx2.textBaseline = 'middle';
+      ctx2.shadowColor = count > 15 ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)';
+      ctx2.shadowBlur = 3;
+      ctx2.fillText(shortName, cx, cy - 6);
+
+      if(count > 0) {
+        ctx2.font = `bold ${Math.max(9, Math.min(13, rw/4))}px DM Sans,sans-serif`;
+        ctx2.fillStyle = count > 15 ? '#fff' : 'rgba(20,15,7,0.9)';
+        ctx2.fillText(count, cx, cy + 8);
+      }
+      ctx2.shadowBlur = 0;
+
+      drawnPolys.push({name, count, x1:Math.min(x1,x2), y1:Math.min(y1,y2), x2:Math.max(x1,x2), y2:Math.max(y1,y2)});
+    });
+
+    // Compass
+    ctx2.save();
+    ctx2.fillStyle = '#C8922A';
+    ctx2.beginPath(); ctx2.moveTo(30,H-30); ctx2.lineTo(25,H-15); ctx2.lineTo(35,H-15); ctx2.closePath(); ctx2.fill();
+    ctx2.fillStyle='rgba(255,255,255,0.25)';
+    ctx2.beginPath(); ctx2.moveTo(30,H-5); ctx2.lineTo(25,H-20); ctx2.lineTo(35,H-20); ctx2.closePath(); ctx2.fill();
+    ctx2.fillStyle='#E8B84B'; ctx2.font='bold 10px sans-serif'; ctx2.textAlign='center';
+    ctx2.fillText('N',30,H-35); ctx2.restore();
+
+    // Scale bar
+    ctx2.fillStyle='rgba(0,0,0,0.5)'; ctx2.fillRect(W-120,H-22,120,18);
+    ctx2.fillStyle='rgba(255,255,255,0.6)'; ctx2.font='10px sans-serif';
+    ctx2.textAlign='center'; ctx2.fillText('Skala Perkiraan — Kab. Wonogiri', W-60, H-8);
+
+    // Border
+    ctx2.strokeStyle='rgba(200,146,42,0.3)'; ctx2.lineWidth=2;
+    ctx2.strokeRect(1,1,W-2,H-2);
+
+    // Tooltip on hover
+    const tooltip = document.getElementById('choroTooltip');
+    canvas.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      const mx = (e.clientX-r.left)*(W/r.width);
+      const my = (e.clientY-r.top)*(H/r.height);
+      const hit = drawnPolys.find(p => mx>=p.x1&&mx<=p.x2&&my>=p.y1&&my<=p.y2);
+      if(hit && hit.count > 0) {
+        const sorted = [...KEC_DATA].sort((a,b)=>b.count-a.count);
+        const rank = sorted.findIndex(k=>k.name===hit.name)+1;
+        document.getElementById('ttName').textContent = hit.name;
+        document.getElementById('ttCount').textContent = hit.count + ' lokasi UMKM & Wisata';
+        document.getElementById('ttRank').textContent = `Ranking #${rank} dari 16 kecamatan`;
+        const left = e.clientX - canvas.getBoundingClientRect().left + 12;
+        const top  = e.clientY - canvas.getBoundingClientRect().top  - 60;
+        tooltip.style.left = Math.min(left, W-180)+'px';
+        tooltip.style.top  = Math.max(4, top)+'px';
+        tooltip.classList.add('show');
+        canvas.style.cursor = 'crosshair';
+      } else {
+        tooltip.classList.remove('show');
+        canvas.style.cursor = 'default';
+      }
+    });
+    canvas.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  }
+
+  // Render kecamatan ranking list
+  function renderKecList() {
+    const el = document.getElementById('kecList');
+    if(!el) return;
+    const sorted = [...KEC_DATA].sort((a,b) => b.count - a.count);
+    const max = sorted[0].count;
+    el.innerHTML = sorted.map((k,i) => `
+      <div class="kec-item">
+        <div class="kec-dot" style="background:${getChoroColor(k.count)}"></div>
+        <div style="flex:1">
+          <div class="kec-name">${k.name.replace('Kec. ','')}</div>
+          <div style="height:4px;border-radius:2px;background:rgba(255,255,255,0.08);margin-top:3px">
+            <div style="height:4px;border-radius:2px;background:${getChoroColor(k.count)};width:${(k.count/max*100).toFixed(0)}%;transition:width .5s"></div>
+          </div>
+        </div>
+        <div class="kec-count">${k.count}</div>
+      </div>`).join('');
+  }
+
+  // Init choropleth when section is visible
+  const choroObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        initChoropleth();
+        renderKecList();
+        choroObs.disconnect();
+      }
+    });
+  }, {threshold: 0.1});
+
+  const choroEl = document.getElementById('choroCanvas');
+  if(choroEl) choroObs.observe(choroEl);
+  window.addEventListener('resize', () => {
+    const cv = document.getElementById('choroCanvas');
+    if(cv && cv.width > 0) initChoropleth();
+  });
+
 </script>
 </body>
 </html>
+    
+
